@@ -17,7 +17,7 @@ class SignIn extends Component {
                     </div>
                     <div className="fields">
                     <TextField id="outlined-basic" label="Email or Phone"  variant="outlined" style={{width:'500px'}} />
-                    <TextField id="outlined-basic" label="password" variant="outlined" style={{width:'500px'}} />
+                    <TextField id="outlined-basic" label="password" variant="outlined" style={{width:'500px',marginTop:"10px"}} />
                     <p className="text1">Forgot email?</p>
                     <p>Not your computer? Use Private Window to sign in.</p>
                     <p className="text1">Learn more</p>
