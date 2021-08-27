@@ -1,0 +1,69 @@
+.header{
+    width: 100vw;
+    height: 100vh;    
+}
+.box{
+    border: 1px solid #dadce0;;
+    border-radius: 2%;
+    width: 70%;
+    height: 100%;
+    position: relative;
+    top: 5%;
+    left: 15%;
+    display: flex;
+    flex-direction: row;
+}
+.section1{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+}
+.mainHeading{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 3%;
+    font-family:'Helvetica Neue', sans-serif;
+    font-size: 25px;
+}
+.fields{
+    text-align: left;
+}
+.email-address{
+    padding: 5% 2%;
+    text-align: left;
+    color: cornflowerblue;
+}
+#text1{
+    padding: 0 3%;
+    color: #5f6368;
+}
+
+.signin{
+    display: flex;
+    flex-direction: row;
+    font-family: "Google Sans",Roboto,Arial,sans-serif;
+    font-weight: 600;
+    padding: 0 3%;
+    width: 100%;
+    color: cornflowerblue;
+    justify-content: space-between;
+}
+.section2{
+    width: 50%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    font-size: medium;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.logo1{
+    width: 70%;
+    height: 70%;
+    position: relative;
+    top: 15%;
+}
