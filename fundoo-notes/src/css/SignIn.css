@@ -1,0 +1,40 @@
+#header {
+  width: 100vw;
+  height: 100vh;
+}
+.box {
+  width: 35%;
+  height: 90%;
+  position: relative;
+  left: 30%;
+  top: 5%;
+  border: 1px solid #dadce0;
+  border-radius: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.mainHeading {
+  position: relative;
+  top: 3%;
+  align-items: center;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 25px;
+}
+.fields {
+  padding: 2% 15%;
+}
+.text1 {
+  color: cornflowerblue;
+  font-weight: 600;
+}
+.signin {
+  display: flex;
+  flex-direction: row;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  font-weight: 600;
+  width: 85%;
+  color: cornflowerblue;
+  justify-content: space-between;
+}
