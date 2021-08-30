@@ -13,21 +13,21 @@ class LoginPage extends Component {
     this.state = {
       firstName: "",
       lastName: "",
-      email: "",
-      password: "",
+      username: "",
+      passwords: "",
       confirm: "",
       firstNameError: "",
       lastNameError: "",
-      emailError: "",
-      passwordError: "",
-      confirmPasswordError: ""
+      usernameError: "",
+      passwordsError: "",
+      confirmPasswordError: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.validateFirstName = this.validateFirstName.bind(this);
     this.validateLastName = this.validateLastName.bind(this);
-    this.validateEmail = this.validateEmail.bind(this);
-    this.validatePassword = this.validatePassword.bind(this);
+    this.validateEmail1 = this.validateEmail1.bind(this);
+    this.validatePassword1 = this.validatePassword1.bind(this);
     this.validateConfirm = this.validateConfirm.bind(this);
   }
 
@@ -37,7 +37,7 @@ class LoginPage extends Component {
     });
   };
 
-  validateFirstName() {
+  validateFirstName = () => {
     let firstNameError = "";
     const value = this.state.firstName;
     if (value.trim() === "") firstNameError = "First Name is required";
@@ -47,9 +47,9 @@ class LoginPage extends Component {
       firstNameError,
     });
     return firstNameError === "";
-  }
+  };
 
-  validateLastName() {
+  validateLastName = () => {
     let lastNameError = "";
     const value = this.state.lastName;
     if (value.trim() === "") lastNameError = "Last Name is required";
@@ -59,60 +59,61 @@ class LoginPage extends Component {
       lastNameError,
     });
     return lastNameError === "";
-  }
+  };
 
-  validateEmail() {
-    let emailError = "";
-    const value = this.state.emailError;
-    if (value.trim() === "") emailError = "Email address is required";
-    else if (!emailRegex.test(value)) emailError = "Email address is not Valid";
+  validateEmail1 = () => {
+    let usernameError = "";
+    const value = this.state.usernameError;
+    if (value.trim() === "") usernameError = "Email address is required";
+    else if (!emailRegex.test(value))
+      usernameError = "Email address is not Valid";
     this.setState({
-      emailError,
+      usernameError,
     });
-    return emailError === "";
-  }
-  validatePassword() {
-    let passwordError = "";
-    const value = this.state.passwordError;
-    if (value.trim() === "") passwordError = "Password is required";
+    return usernameError === "";
+  };
+  validatePassword1 = () => {
+    let passwordsError = "";
+    const value = this.state.passwordsError;
+    if (value.trim() === "") passwordsError = "Password is required";
     else if (!passwordRegex.test(value))
-      passwordError =
+      passwordsError =
         "Password must contain at least 8 characters, 1 number, 1 upper and 1 lowercase!";
     this.setState({
-      passwordError,
+      passwordsError,
     });
-    return passwordError === "";
-  }
+    return passwordsError === "";
+  };
 
-  validateConfirm() {
+  validateConfirm = () => {
     let confirmPasswordError = "";
-    if (this.state.password !== this.state.confirm)
+    if (this.state.passwords !== this.state.confirm)
       confirmPasswordError = "Password does not match";
 
     this.setState({
       confirmPasswordError,
     });
     return confirmPasswordError === "";
-  }
+  };
 
   data = () => {
     let isValid1 = this.validateFirstName();
     let isValid2 = this.validateLastName();
-    let isValid3 = this.validateEmail();
-    let isValid4 = this.validatePassword();
+    let isValid3 = this.validateEmail1();
+    let isValid4 = this.validatePassword1();
     let isValid5 = this.validateConfirm();
-    if(isValid1 || isValid2 || isValid3 || isValid4 || isValid5){
-        console.log("unsuccessful validation");
-    }else{
-        let obj = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            email: this.state.email,
-            password: this.state.password
-        }
-        console.log(obj);
+    if (isValid1 || isValid2 || isValid3 || isValid4 || isValid5) {
+      console.log("unsuccessful validation");
+    } else {
+      let obj = {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.username,
+        password: this.state.passwords,
+      };
+      console.log(obj);
     }
-  }
+  };
   render() {
     return (
       <div id="header">
@@ -173,67 +174,77 @@ class LoginPage extends Component {
                 onChange={this.handleChange}
                 error={this.state.firstNameError}
                 helperText={
-                this.state.firstNameError ? "Enter a valid first name " : ""
-              }
+                  this.state.firstNameError ? "Enter a valid first name " : ""
+                }
                 label="First name"
                 variant="outlined"
                 fullWidth
-                style={{ padding: "0 5px" }}
+                style={{ width: "200px" }}
               />
               <TextField
                 id="outlined-basic"
                 name="lastName"
                 onChange={this.handleChange}
                 error={this.state.lastNameError}
-                helperText={this.state.lastNameError ? "Enter the valid last name" : ""}
+                helperText={
+                  this.state.lastNameError ? "Enter the valid last name" : ""
+                }
                 label="Last name"
                 fullWidth
                 variant="outlined"
+                style={{ width: "200px" }}
               />
             </div>
             <div className="email-address">
               <TextField
                 id="outlined-basic"
-                name="email"
+                name="username"
                 onChange={this.handleChange}
-                error={this.state.emailError}
+                error={this.state.usernameError}
                 fullWidth
                 label="Username @gmail.com"
                 helperText={
-                this.state.emailError ? "Enter a valid email address " : "You can use letters, numbers & periods!"
-              }
+                  this.state.usernameError
+                    ? "Enter a valid email address "
+                    : "You can use letters, numbers & periods!"
+                }
                 variant="outlined"
-                style={{ width: "460px" }}
+                style={{ width: "430px" }}
               />
-              <h3>Use my current email address instead</h3>
+              <h3 id="text-head1">Use my current email address instead</h3>
             </div>
-            <div className="fields">
+            <div id="fields1">
               <TextField
                 id="outlined-basic"
-                name="password"
+                name="passwords"
                 onChange={this.handleChange}
-                error={this.state.passwordError}
+                error={this.state.passwordsError}
                 label="password"
-                helperText={this.state.passwordError ? "Enter a valid password " : ""}
+                helperText={
+                  this.state.passwordsError ? "Enter a valid password " : ""
+                }
                 variant="outlined"
                 fullWidth
-                style={{ padding: "0 5px" }}
+                style={{ width: '200px' }}
               />
               <TextField
                 id="outlined-basic"
                 name="confirm"
                 onChange={this.handleChange}
                 error={this.state.confirmPasswordError}
-                helperText={this.state.confirmPasswordError ? "password not matches" : ""}
+                helperText={
+                  this.state.confirmPasswordError ? "password not matches" : ""
+                }
                 label="confirm"
                 fullWidth
                 variant="outlined"
+                style={{ width:'200px'}}
               />
+              </div>
               <p id="text1">
                 Use 8 or more characters with the mix of letters, numbers &
-                symbols!{" "}
+                symbols!
               </p>
-            </div>
             <div id="checkbox">
               <span>
                 <Checkbox
