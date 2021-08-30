@@ -3,10 +3,8 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import "../css/SignIn.css";
 
-const passwordRegex =
-  /^(?=.{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^&*])(?!.*[!@#$%^&*].*[!@#$%^&*]).*$/;
-const emailRegex =
-  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{8,}$/;
+const emailRegex = /^[a-z0-9.+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$/;
 class SignIn extends Component {
   constructor() {
     super();
@@ -20,60 +18,55 @@ class SignIn extends Component {
     this.validateEmail = this.validateEmail.bind(this);
     this.validatePassword = this.validatePassword.bind(this);
   }
+
   setEmail = (e) => {
     this.setState({
-      email: e.target.value,
+      [e.target.name]: e.target.value,
     });
-
-    // console.log(this.state.email)
   };
   setPassword = (e) => {
     this.setState({
-      password: e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
 
-  
-  validateField(name) {
-    let isValid = false;
-
-    if (name === "email") isValid = this.validateEmail();
-    else if (name === "password") isValid = this.validatePassword();
-    return isValid;
-  }
-  data = () => {
-    let obj = {
-      email: this.state.email,
-      password: this.state.password,
-    };
-    console.log(obj);
-  };
-
-  validateEmail() {
+  validateEmail = () => {
     let emailError = "";
     const value = this.state.email;
-    if (value.trim === "") emailError = "Email Address is required";
+    if (value.trim() === "") emailError = "Email Address is required";
     else if (!emailRegex.test(value)) emailError = "Email is not valid";
-
     this.setState({
       emailError,
     });
     return emailError === "";
-  }
+  };
 
-  validatePassword() {
+  validatePassword = () => {
     let passwordError = "";
     const value = this.state.password;
-    if (value.trim === "") passwordError = "Password is required";
+    if (value.trim() === "") passwordError = "Password is required";
     else if (!passwordRegex.test(value))
       passwordError =
         "Password must contain at least 8 characters, 1 number, 1 upper and 1 lowercase!";
-
     this.setState({
       passwordError,
     });
     return passwordError === "";
-  }
+  };
+
+  Next = () => {
+    let validated = this.validateEmail();
+    let validated1 = this.validatePassword();
+    if (!validated || !validated1) {
+      console.log("unsuccessful validation");
+    } else {
+      let data = {
+        email: this.state.email,
+        password: this.state.password,
+      };
+      console.log(data);
+    }
+  };
 
   render() {
     return (
@@ -86,7 +79,7 @@ class SignIn extends Component {
               height="24"
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
-              class="l5Lhkf"
+              className="l5Lhkf"
             >
               <g id="qaEJec">
                 <path
@@ -125,30 +118,36 @@ class SignIn extends Component {
             <h3>Sign in</h3>
             <p>Use Your Google Account</p>
           </div>
+          <br />
           <div className="fields">
             <TextField
+              name="email"
               id="outlined-basic"
               label="Email or Phone"
+              error={this.state.emailError}
               onChange={this.setEmail}
               variant="outlined"
-              style={{ width: "400px" }}
+              style={{ width: "350px" }}
               helperText={
                 this.state.emailError ? "Enter an email or phone number " : ""
               }
+              fullWidth
             />
             <TextField
               id="outlined-basic"
+              name="password"
               label="password"
+              error={this.state.passwordError}
               onChange={this.setPassword}
               variant="outlined"
-              style={{ width: "400px", marginTop: "10px" }}
+              style={{ width: "350px", marginTop: "10px" }}
               helperText={
                 this.state.passwordError ? "Enter a valid password " : ""
               }
+              fullWidth
             />
-            {this.state.passwordError && (
-              <div className="errorMsg">{this.state.passwordError}</div>
-            )}
+          </div>
+          <div className="text2">
             <p className="text1">Forgot email?</p>
             <p>Not your computer? Use Private Window to sign in.</p>
             <p className="text1">Learn more</p>
@@ -159,7 +158,7 @@ class SignIn extends Component {
               variant="contained"
               color="primary"
               href="#contained-buttons"
-              onClick={this.data}
+              onClick={this.Next}
             >
               Next
             </Button>
