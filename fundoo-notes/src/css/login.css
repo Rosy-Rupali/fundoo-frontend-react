@@ -1,0 +1,85 @@
+#header {
+  width: 100vw;
+  height: 100vh;
+}
+#box {
+  border: 1px solid #dadce0;
+  border-radius: 2%;
+  width: 70%;
+  height: 100%;
+  position: relative;
+  top: 5%;
+  left: 15%;
+  display: flex;
+  flex-direction: row;
+}
+#section1 {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.mainHeading {
+  align-self: flex-start;
+  padding: 0 5%;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 20px;
+}
+#fields {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+#fields1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.email-address {
+  width: 100%;
+  color: cornflowerblue;
+}
+#text1 {
+  color: #5f6368;
+  text-align: left;
+  padding: 0 5%;
+}
+#text-head1 {
+  padding-right: 20%;
+}
+.signin {
+  display: flex;
+  flex-direction: row;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  font-weight: 600;
+  width: 100%;
+  color: cornflowerblue;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+#checkbox {
+  display: flex;
+  flex-direction: row;
+  align-self: flex-start;
+  padding: 0 3%;
+}
+#section2 {
+  width: 50%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: medium;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.logo1 {
+  width: 70%;
+  height: 70%;
+  position: relative;
+  top: 10%;
+}

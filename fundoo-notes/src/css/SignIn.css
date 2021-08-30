@@ -23,18 +23,26 @@
   font-size: 25px;
 }
 .fields {
-  padding: 2% 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .text1 {
   color: cornflowerblue;
   font-weight: 600;
 }
+.text2{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 .signin {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
   font-family: "Google Sans", Roboto, Arial, sans-serif;
   font-weight: 600;
-  width: 85%;
+  width: 75%;
   color: cornflowerblue;
   justify-content: space-between;
 }
