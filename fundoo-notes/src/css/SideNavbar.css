@@ -1,0 +1,26 @@
+#header{
+    height: 100vh;
+    width: 25vw;
+}
+.side-nav{
+    height: 60%;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    bottom: 70%;
+}
+#block1,
+#block2{
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: space-evenly;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(75, 72, 72);
+    text-align: left;
+}
