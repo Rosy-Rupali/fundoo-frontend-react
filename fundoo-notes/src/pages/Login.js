@@ -3,6 +3,8 @@ import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import "../css/login.css";
+import { SignUp } from "../Services/UserService";
+
 
 const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{8,}$/;
 const emailRegex = /^[a-z0-9.+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$/;
@@ -23,25 +25,39 @@ class LoginPage extends Component {
       confirmPasswordError: "",
     };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.validateFirstName = this.validateFirstName.bind(this);
-    this.validateLastName = this.validateLastName.bind(this);
-    this.validateEmail1 = this.validateEmail1.bind(this);
-    this.validatePassword1 = this.validatePassword1.bind(this);
-    this.validateConfirm = this.validateConfirm.bind(this);
   }
 
-  handleChange = (e) => {
+  handleFirstName = (e) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      firstName: e.target.value,
+    });
+  };
+  handleLastName = (e) => {
+    this.setState({
+      lastName: e.target.value,
+    });
+  };
+  handleEmail = (e) => {
+    this.setState({
+      username: e.target.value,
+    });
+  };
+
+  handlePassword = (e) => {
+    this.setState({
+      passwords: e.target.value,
+    });
+  };
+  handleConfirm = (e) => {
+    this.setState({
+      confirm: e.target.value,
     });
   };
 
   validateFirstName = () => {
     let firstNameError = "";
     const value = this.state.firstName;
-    if (value.trim() === "") firstNameError = "First Name is required";
-    else if (!nameRegex.test(value))
+    if (!nameRegex.test(value))
       firstNameError = "First name should contain more than 2 characters";
     this.setState({
       firstNameError,
@@ -51,9 +67,9 @@ class LoginPage extends Component {
 
   validateLastName = () => {
     let lastNameError = "";
+    console.log(this.state.lastName);
     const value = this.state.lastName;
-    if (value.trim() === "") lastNameError = "Last Name is required";
-    else if (!nameRegex.test(value))
+    if (!nameRegex.test(value))
       lastNameError = "Last name should contain more than 2 characters";
     this.setState({
       lastNameError,
@@ -63,20 +79,20 @@ class LoginPage extends Component {
 
   validateEmail1 = () => {
     let usernameError = "";
-    const value = this.state.usernameError;
-    if (value.trim() === "") usernameError = "Email address is required";
-    else if (!emailRegex.test(value))
-      usernameError = "Email address is not Valid";
+    console.log(this.state.username);
+    const value = this.state.username;
+
+    if (!emailRegex.test(value)) usernameError = "Email address is not Valid";
     this.setState({
       usernameError,
     });
+
     return usernameError === "";
   };
   validatePassword1 = () => {
     let passwordsError = "";
-    const value = this.state.passwordsError;
-    if (value.trim() === "") passwordsError = "Password is required";
-    else if (!passwordRegex.test(value))
+    const value = this.state.passwords;
+    if (!passwordRegex.test(value))
       passwordsError =
         "Password must contain at least 8 characters, 1 number, 1 upper and 1 lowercase!";
     this.setState({
@@ -87,6 +103,8 @@ class LoginPage extends Component {
 
   validateConfirm = () => {
     let confirmPasswordError = "";
+    console.log(this.state.passwords);
+    console.log(this.state.confirm);
     if (this.state.passwords !== this.state.confirm)
       confirmPasswordError = "Password does not match";
 
@@ -97,12 +115,13 @@ class LoginPage extends Component {
   };
 
   data = () => {
+    
     let isValid1 = this.validateFirstName();
     let isValid2 = this.validateLastName();
     let isValid3 = this.validateEmail1();
     let isValid4 = this.validatePassword1();
     let isValid5 = this.validateConfirm();
-    if (isValid1 || isValid2 || isValid3 || isValid4 || isValid5) {
+    if (!isValid1 || !isValid2 || !isValid3 || !isValid4 || !isValid5) {
       console.log("unsuccessful validation");
     } else {
       let obj = {
@@ -110,16 +129,24 @@ class LoginPage extends Component {
         lastName: this.state.lastName,
         email: this.state.username,
         password: this.state.passwords,
+        service: "advance"
       };
       console.log(obj);
+      SignUp(obj)
+     .then(response =>{
+       console.log(response)
+     })
+     .catch(error =>{
+       console.log(error)
+     })
     }
   };
   render() {
     return (
-      <div id="header">
+      <div id="header1">
         <div id="box">
           <div id="section1">
-            <div className="mainHeading">
+            <div id="mainHeading1">
               <svg
                 viewBox="0 0 75 24"
                 width="75"
@@ -167,11 +194,11 @@ class LoginPage extends Component {
               </svg>
               <h3 id="createAccount">Create your Google Account</h3>
             </div>
-            <div id="fields">
+            <div className="fields1">
               <TextField
                 id="outlined-basic"
                 name="firstName"
-                onChange={this.handleChange}
+                onChange={this.handleFirstName}
                 error={this.state.firstNameError}
                 helperText={
                   this.state.firstNameError ? "Enter a valid first name " : ""
@@ -179,12 +206,12 @@ class LoginPage extends Component {
                 label="First name"
                 variant="outlined"
                 fullWidth
-                style={{ width: "200px" }}
+                style={{ width: "200px", height: "80px" }}
               />
               <TextField
                 id="outlined-basic"
                 name="lastName"
-                onChange={this.handleChange}
+                onChange={this.handleLastName}
                 error={this.state.lastNameError}
                 helperText={
                   this.state.lastNameError ? "Enter the valid last name" : ""
@@ -192,14 +219,14 @@ class LoginPage extends Component {
                 label="Last name"
                 fullWidth
                 variant="outlined"
-                style={{ width: "200px" }}
+                style={{ width: "200px", height:'80px' }}
               />
             </div>
-            <div className="email-address">
+            <div className="email-address1">
               <TextField
                 id="outlined-basic"
                 name="username"
-                onChange={this.handleChange}
+                onChange={this.handleEmail}
                 error={this.state.usernameError}
                 fullWidth
                 label="Username @gmail.com"
@@ -209,15 +236,15 @@ class LoginPage extends Component {
                     : "You can use letters, numbers & periods!"
                 }
                 variant="outlined"
-                style={{ width: "430px" }}
+                style={{ width: "430px", height: "70px"}}
               />
               <h3 id="text-head1">Use my current email address instead</h3>
             </div>
-            <div id="fields1">
+            <div className="fields1">
               <TextField
                 id="outlined-basic"
                 name="passwords"
-                onChange={this.handleChange}
+                onChange={this.handlePassword}
                 error={this.state.passwordsError}
                 label="password"
                 helperText={
@@ -225,12 +252,12 @@ class LoginPage extends Component {
                 }
                 variant="outlined"
                 fullWidth
-                style={{ width: '200px' }}
+                style={{ width: "200px" }}
               />
               <TextField
                 id="outlined-basic"
                 name="confirm"
-                onChange={this.handleChange}
+                onChange={this.handleConfirm}
                 error={this.state.confirmPasswordError}
                 helperText={
                   this.state.confirmPasswordError ? "password not matches" : ""
@@ -238,13 +265,13 @@ class LoginPage extends Component {
                 label="confirm"
                 fullWidth
                 variant="outlined"
-                style={{ width:'200px'}}
+                style={{ width: "200px" }}
               />
-              </div>
-              <p id="text1">
-                Use 8 or more characters with the mix of letters, numbers &
-                symbols!
-              </p>
+            </div>
+            <p id="text1">
+              Use 8 or more characters with the mix of letters, numbers &
+              symbols!
+            </p>
             <div id="checkbox">
               <span>
                 <Checkbox

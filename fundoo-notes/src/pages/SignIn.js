@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Login} from '../Services/UserService'
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import "../css/SignIn.css";
@@ -14,27 +15,23 @@ class SignIn extends Component {
       emailError: "",
       passwordError: "",
     };
-
-    this.validateEmail = this.validateEmail.bind(this);
-    this.validatePassword = this.validatePassword.bind(this);
   }
 
   setEmail = (e) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      email: e.target.value,
     });
   };
   setPassword = (e) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      password: e.target.value,
     });
   };
 
   validateEmail = () => {
     let emailError = "";
     const value = this.state.email;
-    if (value.trim() === "") emailError = "Email Address is required";
-    else if (!emailRegex.test(value)) emailError = "Email is not valid";
+     if (!emailRegex.test(value)) emailError = "Email is not valid";
     this.setState({
       emailError,
     });
@@ -44,8 +41,7 @@ class SignIn extends Component {
   validatePassword = () => {
     let passwordError = "";
     const value = this.state.password;
-    if (value.trim() === "") passwordError = "Password is required";
-    else if (!passwordRegex.test(value))
+     if (!passwordRegex.test(value))
       passwordError =
         "Password must contain at least 8 characters, 1 number, 1 upper and 1 lowercase!";
     this.setState({
@@ -55,6 +51,8 @@ class SignIn extends Component {
   };
 
   Next = () => {
+   
+    
     let validated = this.validateEmail();
     let validated1 = this.validatePassword();
     if (!validated || !validated1) {
@@ -65,14 +63,22 @@ class SignIn extends Component {
         password: this.state.password,
       };
       console.log(data);
+      Login(data)
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error =>{
+          console.log(error)
+        })
+      
     }
   };
 
   render() {
     return (
-      <div id="header">
-        <div className="box">
-          <div className="mainHeading">
+      <div id="header-sign">
+        <div id="box-sign">
+          <div id="mainHeading-sign">
             <svg
               viewBox="0 0 75 24"
               width="75"
@@ -117,9 +123,7 @@ class SignIn extends Component {
             </svg>
             <h3>Sign in</h3>
             <p>Use Your Google Account</p>
-          </div>
-          <br />
-          <div className="fields">
+         
             <TextField
               name="email"
               id="outlined-basic"
@@ -147,10 +151,10 @@ class SignIn extends Component {
               fullWidth
             />
           </div>
-          <div className="text2">
-            <p className="text1">Forgot email?</p>
+          <div>
+            <p className="text-p1">Forgot email?</p>
             <p>Not your computer? Use Private Window to sign in.</p>
-            <p className="text1">Learn more</p>
+            <p className="text-p1">Learn more</p>
           </div>
           <div className="signin">
             <p> Create Account</p>
