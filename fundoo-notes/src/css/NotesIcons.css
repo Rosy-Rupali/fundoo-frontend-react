@@ -1,0 +1,13 @@
+.displayNotesIcons-mainContainer {
+    height: 30%;
+    width: 100%;
+  }
+  .displayNotes-icons {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  
+  
