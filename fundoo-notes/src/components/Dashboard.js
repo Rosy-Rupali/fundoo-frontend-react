@@ -2,28 +2,39 @@ import React, { useState } from "react";
 import DashboardHeader from "./DashboardHeader";
 import CreateNote1 from "./CreateNote1";
 import CreateNote2 from "./CreateNote2";
-import DisplayNotes from "./DisplayNotes";
+import DisplayNotesNew from "./DisplayNotesNew";
+import Notes from "./Notes";
 import "../css/DashboardMain.css";
 
 function DashBoard() {
   const [openNote, setOpenNote] = useState(false);
- 
 
-  const openNote2 = () => {
-    setOpenNote(!openNote);
+  const inputNote1 = (data) => {
+    if(data === 'true'){
+        setOpenNote(!openNote)
+    }
+  };
+  const inputNote2 = (data) => {
+    if(data === 'true'){
+        setOpenNote(!openNote)
+    }
   };
 
- 
   return (
     <div class="dashboard-main-container">
       <div className="dashboard-header">
         <DashboardHeader />
       </div>
-      <div className="createnote-container" onClick={openNote2}>
-        {openNote ? <CreateNote2 /> : <CreateNote1 />}
+      <div className="createnote-container">
+        {openNote ? (
+          <CreateNote2 listentoNote2={inputNote2} />
+        ) : (
+          <CreateNote1 listentoNote1={inputNote1} />
+        )}
       </div>
       <div className="displaynote-container" >
-        <DisplayNotes />
+      <DisplayNotesNew />
+        {/* <Notes /> */}
       </div>
     </div>
   );
