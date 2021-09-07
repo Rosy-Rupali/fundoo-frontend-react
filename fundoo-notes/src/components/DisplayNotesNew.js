@@ -5,6 +5,7 @@ import { getNote } from "../Services/DataService";
 
 const DisplayNotesNew = () => {
   const [noteArray, setArray] = React.useState([]);
+
   useEffect(() => {
     getNote()
       .then((response) => {
@@ -18,7 +19,6 @@ const DisplayNotesNew = () => {
 
   console.log(noteArray);
   const noteList = noteArray.map((info) => <Notes info={info} />);
-
   return <div className="displaynotenew-mainContainer">{noteList}</div>;
 };
 export default DisplayNotesNew;

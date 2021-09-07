@@ -2,6 +2,7 @@ import React from "react";
 import ColorLensOutlinedIcon from "@material-ui/icons/ColorLensOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 import Popper from "@material-ui/core/Popper";
+import { getThemeProps } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -23,9 +24,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleColourPopper() {
+export default function SimpleColourPopper(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [color, setColor] = React.useState('')
   const colorArray = [
     { color: "#fafafa" },
     { color: "#ef9a9a" },
@@ -40,6 +42,12 @@ export default function SimpleColourPopper() {
     { color: "#a1887f" },
     { color: "#cfd8dc" },
   ];
+
+  const getColor = (e) =>{
+    setColor(e.target.id)
+    props.color(color)
+    console.log(e.target.id)
+  }
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
@@ -56,7 +64,7 @@ export default function SimpleColourPopper() {
       <Popper id={id} open={open} anchorEl={anchorEl}>
         <div className={classes.paper}>
           {colorArray.map((color) => (
-            <div
+            <div onClick={getColor} id={color.color}
               className={classes.colorBox}
               style={{ backgroundColor: color.color }}
             ></div>

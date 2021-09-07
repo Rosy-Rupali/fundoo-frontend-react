@@ -7,15 +7,15 @@ import MoreVertOutlinedIcon from "@material-ui/icons/MoreVertOutlined";
 import SimpleColourPopper from "../components/ColorPalette";
 import "../css/NotesIcons.css";
 
-const NotesIcons = () => {
+const NotesIcons = (props) => {
   return (
     <div className="displayNotesIcons-mainContainer">
       <div className="displayNotes-icons">
         <AddAlertOutlinedIcon style={{ fontSize: "medium" }} />
-        <PersonAddOutlinedIcon style={{ fontSize: "medium" }} />
-        <SimpleColourPopper />
+        <PersonAddOutlinedIcon on style={{ fontSize: "medium" }} />
+        <SimpleColourPopper color={props.color} />
         <ImageOutlinedIcon style={{ fontSize: "medium" }} />
-        <SimpleSnackbar />
+        <SimpleSnackbar archive={props.archive} />
         <MoreVertOutlinedIcon style={{ fontSize: "medium" }} />
       </div>
     </div>

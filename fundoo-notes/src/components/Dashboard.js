@@ -3,11 +3,10 @@ import DashboardHeader from "./DashboardHeader";
 import CreateNote1 from "./CreateNote1";
 import CreateNote2 from "./CreateNote2";
 import DisplayNotesNew from "./DisplayNotesNew";
-import Notes from "./Notes";
 import "../css/DashboardMain.css";
 
 function DashBoard() {
-  const [openNote, setOpenNote] = useState(false);
+  const [openNote, setOpenNote] = useState('jjh');
 
   const inputNote1 = (data) => {
     if(data === 'true'){
@@ -34,7 +33,6 @@ function DashBoard() {
       </div>
       <div className="displaynote-container" >
       <DisplayNotesNew />
-        {/* <Notes /> */}
       </div>
     </div>
   );
