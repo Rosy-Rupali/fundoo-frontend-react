@@ -1,10 +1,10 @@
 import React from "react";
 import AddAlertOutlinedIcon from "@material-ui/icons/AddAlertOutlined";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
-import ColorLensOutlinedIcon from "@material-ui/icons/ColorLensOutlined";
 import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
-import ArchiveOutlinedIcon from "@material-ui/icons/ArchiveOutlined";
+import SimpleSnackbar from '../components/ArchiveIcon'
 import MoreVertOutlinedIcon from "@material-ui/icons/MoreVertOutlined";
+import SimpleColourPopper from "../components/ColorPalette";
 import "../css/NotesIcons.css";
 
 const NotesIcons = () => {
@@ -13,9 +13,9 @@ const NotesIcons = () => {
       <div className="displayNotes-icons">
         <AddAlertOutlinedIcon style={{ fontSize: "medium" }} />
         <PersonAddOutlinedIcon style={{ fontSize: "medium" }} />
-        <ColorLensOutlinedIcon style={{ fontSize: "medium" }} />
+        <SimpleColourPopper />
         <ImageOutlinedIcon style={{ fontSize: "medium" }} />
-        <ArchiveOutlinedIcon style={{ fontSize: "medium" }} />
+        <SimpleSnackbar />
         <MoreVertOutlinedIcon style={{ fontSize: "medium" }} />
       </div>
     </div>
