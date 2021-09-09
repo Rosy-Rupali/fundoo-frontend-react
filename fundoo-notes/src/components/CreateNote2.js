@@ -37,6 +37,9 @@ const CreateNote2 = (props) => {
     console.log(e.target.value);
   };
 
+  const collaborator = (data) => {
+    props.listentoNote2(data)
+  }
   const closeButton = () => {
     let obj = {
       title: title,
@@ -93,7 +96,11 @@ const CreateNote2 = (props) => {
             />
           </p>
           <div className="createnote-closeButton">
-            <NotesIcons archive={archive} color={color} />
+            <NotesIcons 
+            archive={archive} 
+            color={color} 
+            Collaborator={collaborator}  
+            />
           
             <Button onClick={closeButton} style={{ fontSize: "small" }}>
               Close
