@@ -16,4 +16,11 @@ export const getNote = async() => {
   return response;
 }
 
+export const GetEmail = async (data) => {
+  console.log(data)
+  let response = await axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/searchUserList', data, config)
+  console.log(response)
+  return response;
+}
+
 
