@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import DashboardHeader from "./DashboardHeader";
 import CreateNote1 from "./CreateNote1";
 import CreateNote2 from "./CreateNote2";
-import CreateNote3 from "./CreateNote3";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -17,26 +16,23 @@ import "../css/SideNavbar.css";
 
 const useStyles = makeStyles((theme) => ({
   hide: {
-    display: "block",
+    display: "none",
   },
   drawer: {
-    width: '15vw',
     flexShrink: 0,
     whiteSpace: "nowrap",
   },
   drawerOpen: {
-    width: '15vw',
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
 
-    border: "none !important",
+    border: "none",
     paddingLeft: 0,
-    boxShadow: "0rem 0.5rem 1rem rgba(100,100,100,0.1) !important",
     [theme.breakpoints.up("md")]: {
       paddingLeft: 6,
-      marginTop: 64,
+      marginTop: 110,
     },
     marginTop: 55,
   },
@@ -48,15 +44,15 @@ const useStyles = makeStyles((theme) => ({
     overflowX: "hidden",
     width: theme.spacing(6.7),
     [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(8.5) + 1,
+      width: theme.spacing(17.5) + 1,
       paddingLeft: 6,
-      marginTop: 64,
+      marginTop: 110,
     },
     marginTop: 55,
     border: "none !important",
   },
 }));
-function DashBoard(props) {
+function DashBoard() {
   const [openNote, setOpenNote] = useState(false);
   const [handleDrawer1, setHandleDrawer] = useState(false);
   const classes = useStyles();
@@ -75,25 +71,25 @@ function DashBoard(props) {
       setOpenNote(!openNote);
     }
   };
-  const handleClickAwayEvent = () => {};
+  const handleClickAwayEventDashboard = () => {};
   return (
     <div class="dashboard-main-container">
       <div className="dashboard-header">
         <DashboardHeader handleDrawer={handleDrawer} />
       </div>
-      <ClickAwayListener onClickAway={handleClickAwayEvent}>
+      <ClickAwayListener onClickAway={handleClickAwayEventDashboard}>
         <div className="container-sideNavBar">
           <Drawer
             open={handleDrawer1}
             variant="persistent"
             className={clsx(classes.drawer, {
-              [classes.drawerOpen]: props.handleDrawer1,
-              [classes.drawerClose]: !props.handleDrawer1,
+              [classes.drawerOpen]: handleDrawer1,
+              [classes.drawerClose]: !handleDrawer1,
             })}
             classes={{
               paper: clsx({
-                [classes.drawerOpen]: props.handleDrawer1,
-                [classes.drawerClose]: !props.handleDrawer1,
+                [classes.drawerOpen]: handleDrawer1,
+                [classes.drawerClose]: !handleDrawer1,
               }),
             }}
           >
@@ -135,7 +131,9 @@ function DashBoard(props) {
           <CreateNote1 listentoNote1={inputNote1} />
         )}
       </div>
-      <div className="displaynote-container">{/* <DisplayNotesNew /> */}</div>
+      <div className="displaynote-container">
+      <DisplayNotesNew />
+      </div>
     </div>
   );
 }

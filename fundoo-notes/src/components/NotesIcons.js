@@ -9,14 +9,15 @@ import SimpleColourPopper from "../components/ColorPalette";
 import "../css/NotesIcons.css";
 
 const NotesIcons = (props) => {
+ 
   const handleCollaborator = () => {
-    props.Collaborator('collab')
+    props.Collaborator();
   };
   return (
     <div className="displayNotesIcons-mainContainer">
       <div className="displayNotes-icons">
         <AddAlertOutlinedIcon style={{ fontSize: "medium" }} />
-        <PersonAddOutlinedIcon 
+        <PersonAddOutlinedIcon
           onClick={handleCollaborator}
           style={{ fontSize: "medium" }}
         />

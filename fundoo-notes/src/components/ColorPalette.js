@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SimpleColourPopper(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [color, setColor] = React.useState('')
+  const [color, setColor] = React.useState("");
   const colorArray = [
     { color: "#fafafa" },
     { color: "#ef9a9a" },
@@ -43,13 +43,11 @@ export default function SimpleColourPopper(props) {
     { color: "#cfd8dc" },
   ];
 
-  const getColor = (e) =>{
-    setColor(e.target.id)
-    props.color(color)
-    console.log(e.target.id)
-  }
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
+    setColor(event.target.id);
+    props.color(color);
+    console.log(event.target.id);
   };
 
   const open = Boolean(anchorEl);
@@ -64,7 +62,8 @@ export default function SimpleColourPopper(props) {
       <Popper id={id} open={open} anchorEl={anchorEl}>
         <div className={classes.paper}>
           {colorArray.map((color) => (
-            <div onClick={getColor} id={color.color}
+            <div
+              id={color.color}
               className={classes.colorBox}
               style={{ backgroundColor: color.color }}
             ></div>
