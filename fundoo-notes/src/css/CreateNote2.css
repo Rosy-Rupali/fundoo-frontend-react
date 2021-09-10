@@ -14,7 +14,6 @@
   flex-direction: row;
   align-items: center;
   padding-left: 3%;
-  
   justify-content: space-between;
 }
 #forminput2 {
@@ -24,7 +23,6 @@
   font-family: Arial, Helvetica, sans-serif;
   width: 90%;
   padding-left: 3%;
-  
 }
 #para-createnote2 {
   height: 50%;
@@ -37,12 +35,15 @@
   font-weight: bold;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+.user-account{
+  padding-left: 3%;
+}
 .pin-createnote2 {
   height: 60%;
 }
-.createnote-closeButton{
+.createnote-closeButton {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-right: 3%; 
+  padding-right: 3%;
 }
