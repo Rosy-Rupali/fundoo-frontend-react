@@ -8,9 +8,12 @@
   border: 1px solid gray;
   border-radius: 10px;
   display: flex;
-  flex-direction: column;
+  flex-direction:column;
   align-items: flex-start;
-  justify-content: space-around;
+  justify-content: space-between;
+}
+.Note2-mainContainer :hover{
+  box-shadow: 0 1px 7px rgb(128, 128, 128);
 }
 .note2-title {
   height: 30%;

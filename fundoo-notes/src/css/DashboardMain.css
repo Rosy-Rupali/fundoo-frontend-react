@@ -1,17 +1,15 @@
-.dashboard-main-container{
-    height: 100vh;
-    width: 100vw;
+.dashboard-main-container {
+  height: 100vh;
+  width: 100vw;
 }
-.createnote-container{
-    height: 30%;
-    width: 50%;
-    margin-left: 25%;
-    margin-top: 5%;
+.createnote-container {
+  height: 30%;
+  width: 50%;
+  margin-left: 25%;
 }
 /* .displaynote-container{
-    height: 70vh;
-    width: 80vw;
+    height: 40vh;
+    width: 70vw;
     margin-left: 15%;
-    border-radius: 10px;
-    border: 5px solid red;
+    border: 5px solid blue;
 } */

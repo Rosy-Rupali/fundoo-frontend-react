@@ -35,6 +35,9 @@
   font-weight: bold;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+.user-account{
+  padding-left: 3%;
+}
 .pin-createnote2 {
   height: 60%;
 }
