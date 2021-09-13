@@ -16,25 +16,24 @@ import "../css/SideNavbar.css";
 
 const useStyles = makeStyles((theme) => ({
   hide: {
-    display: "none",
+    display: "block",
   },
   drawer: {
+    width: "170px",
     flexShrink: 0,
     whiteSpace: "nowrap",
   },
   drawerOpen: {
+    width: "170px",
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
 
-    border: "none",
+    border: "none !important",
     paddingLeft: 0,
-    [theme.breakpoints.up("md")]: {
-      paddingLeft: 6,
-      marginTop: 110,
-    },
-    marginTop: 55,
+    boxShadow: "0rem 0.5rem 1rem rgba(100,100,100,0.1) !important",
+    marginTop: 110,
   },
   drawerClose: {
     transition: theme.transitions.create("width", {
@@ -43,12 +42,7 @@ const useStyles = makeStyles((theme) => ({
     }),
     overflowX: "hidden",
     width: theme.spacing(6.7),
-    [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(17.5) + 1,
-      paddingLeft: 6,
-      marginTop: 110,
-    },
-    marginTop: 55,
+    marginTop: 110,
     border: "none !important",
   },
 }));
@@ -80,8 +74,7 @@ function DashBoard() {
       <ClickAwayListener onClickAway={handleClickAwayEventDashboard}>
         <div className="container-sideNavBar">
           <Drawer
-            open={handleDrawer1}
-            variant="persistent"
+            variant="permanent"
             className={clsx(classes.drawer, {
               [classes.drawerOpen]: handleDrawer1,
               [classes.drawerClose]: !handleDrawer1,
@@ -132,7 +125,7 @@ function DashBoard() {
         )}
       </div>
       <div className="displaynote-container">
-      <DisplayNotesNew />
+        <DisplayNotesNew />
       </div>
     </div>
   );
