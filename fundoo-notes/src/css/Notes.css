@@ -1,6 +1,10 @@
 .Note2-mainContainer {
-  height: 20vh;
+  height: 23vh;
   width: 20vw;
+}
+.note-testMainContainer {
+  height: 90%;
+  width: 100%;
 }
 .note2-testContainer {
   height: 100%;
@@ -8,21 +12,18 @@
   border: 1px solid gray;
   border-radius: 10px;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
-.Note2-mainContainer :hover{
-  box-shadow: 0 1px 7px rgb(128, 128, 128);
-}
+
 .note2-title {
-  height: 30%;
+  height: 20%;
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  
 }
 .note2-paragraph {
   height: 70%;

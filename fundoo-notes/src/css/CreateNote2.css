@@ -1,12 +1,13 @@
 .createnote2-mainContainer {
   height: 25vh;
   width: 45vw;
+  border-radius: 10px;
+  box-shadow: 0 1px 7px rgb(128, 128, 128);
 }
 .createnote2-testContainer {
   height: 100%;
   width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 1px 7px rgb(128, 128, 128);
+
 }
 .title-createnote2 {
   height: 30%;

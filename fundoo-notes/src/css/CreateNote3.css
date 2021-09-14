@@ -1,7 +1,6 @@
 .createnote3-mainContainer {
     height: 50vh;
     width: 45vw;
-    margin-left: 25%;
     border-radius: 10px;
     box-shadow: 0 1px 7px rgb(128, 128, 128);
   }
@@ -27,8 +26,21 @@
   .createnote3-account {
     display: flex;
     flex-direction: column;
-    padding-left: 3%;
+    margin-left: 3%;
     justify-content: center;
+  }
+  .avatar-display{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .avatar-display-row{
+    display: flex;
+    flex-direction: row;
+    padding-left: 3%;
+  }
+  .avatar-email-display{
+    padding-left: 3%;
   }
   .createnote3-footer {
     height: 25%;
