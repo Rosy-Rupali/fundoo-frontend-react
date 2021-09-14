@@ -4,14 +4,30 @@ import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
+import { archiveNotes } from "../Services/DataService";
 
 export default function SimpleSnackbar(props) {
   const [open, setOpen] = React.useState(false);
-  const [isArchive, setIsArchive] = React.useState(false)
+  const [isArchive, setIsArchive] = React.useState(false);
+
   const handleClick = () => {
-    setIsArchive(!isArchive)
-    props.archive(isArchive)
+    setIsArchive(!isArchive);
     setOpen(true);
+    console.log(props.actionArchive, "hiuihiu");
+    if (props.actionArchive === "createnote") {
+      props.archive(isArchive);
+    } else if (props.actionArchive === "updatenote") {
+      let obj = {
+        isArchived: isArchive,
+      };
+      archiveNotes(obj)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   const handleClose = (event, reason) => {
@@ -26,7 +42,7 @@ export default function SimpleSnackbar(props) {
     <div>
       <ArchiveOutlinedIcon
         style={{ fontSize: "medium" }}
-        onClick={handleClick} 
+        onClick={handleClick}
       />
       <Snackbar
         anchorOrigin={{
@@ -40,7 +56,7 @@ export default function SimpleSnackbar(props) {
         action={
           <React.Fragment>
             <Button color="secondary" size="small" onClick={handleClose}>
-              UNDO 
+              UNDO
             </Button>
             <IconButton
               size="small"
