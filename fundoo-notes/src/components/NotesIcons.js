@@ -7,8 +7,13 @@ import SimpleSnackbar from "../components/ArchiveIcon";
 import MoreVertOutlinedIcon from "@material-ui/icons/MoreVertOutlined";
 import SimpleColourPopper from "../components/ColorPalette";
 import "../css/NotesIcons.css";
+import DateNTimePickers from "./DateNTimePicker";
 
 const NotesIcons = (props) => {
+
+  // const handleReminder = () => {
+   
+  // // }
  
   const handleCollaborator = () => {
     props.Collaborator();
@@ -16,7 +21,7 @@ const NotesIcons = (props) => {
   return (
     <div className="displayNotesIcons-mainContainer">
       <div className="displayNotes-icons">
-        <AddAlertOutlinedIcon style={{ fontSize: "medium" }} />
+      <DateNTimePickers reminder={ props.reminder} />
         <PersonAddOutlinedIcon
           onClick={handleCollaborator}
           style={{ fontSize: "medium" }}
@@ -24,7 +29,7 @@ const NotesIcons = (props) => {
 
         <SimpleColourPopper color={props.color} />
         <ImageOutlinedIcon style={{ fontSize: "medium" }} />
-        <SimpleSnackbar archive={props.archive} />
+        <SimpleSnackbar archive={props.archive} actionArchive={props.action} details={props.noteDetails} />
         <MoreVertOutlinedIcon style={{ fontSize: "medium" }} />
       </div>
     </div>
