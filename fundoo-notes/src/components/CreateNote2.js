@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, {useEffect, useState } from "react";
+import TextField from '@material-ui/core/TextField';
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Button from "@material-ui/core/Button";
 import { WriteNote } from "../Services/DataService";
@@ -16,8 +17,9 @@ const CreateNote2 = (props) => {
   const [colour1, setColour1] = useState("#FFF");
   const [archive1, setArchive1] = useState(false);
   const [users, setUsers] = useState([]);
+  const[reminder, setReminder] = useState("");
+  const [collabArray, setCollabArray] = useState("")
   const [isPined, setIsPined] = useState(false);
-
   // const pin = () => {
   //   setIsPined(!isPined);
   // };
@@ -47,6 +49,8 @@ const CreateNote2 = (props) => {
       description: description,
       isArchived: archive1,
       color: colour1,
+      collaberators: collabArray,
+      reminder: reminder,
     };
     WriteNote(obj)
       .then((response) => {
@@ -59,9 +63,11 @@ const CreateNote2 = (props) => {
   const collaborator = () => {
     setCreateNote(!createNote);
   };
-  const openCreateNote2 = (data) => {
+  const openCreateNote2 = (data, collabList) => {
     if (data === "opencreatenote2") {
+      console.log(JSON.stringify(collabList));
       setCreateNote(!createNote);
+      setCollabArray(collabList)
     }
   };
 
@@ -72,6 +78,14 @@ const CreateNote2 = (props) => {
   useEffect(() => {
     console.log({ colour1 });
   }, [colour1]);
+
+
+  const displayReminder = (date, time) => {
+    let a = date.concat('T');
+    let b = time;
+    setReminder(a.concat(b))
+    console.log(reminder);
+  }
 
   return (
     <ClickAwayListener onClickAway={handleClickAwayEvent}>
@@ -116,6 +130,8 @@ const CreateNote2 = (props) => {
                   archive={archive}
                   color={color}
                   Collaborator={collaborator}
+                  reminder={displayReminder}
+                  action='createnote'
                 />
 
                 <Button onClick={closeButton} style={{ fontSize: "small" }}>

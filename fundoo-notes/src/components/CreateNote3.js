@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
-import Divider from '@material-ui/core/Divider';
+import Divider from "@material-ui/core/Divider";
 import { makeStyles } from "@material-ui/core/styles";
 import Popper from "@material-ui/core/Popper";
 import TextField from "@material-ui/core/TextField";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { GetEmail } from "../Services/DataService";
 import "../css/CreateNote3.css";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     height: "300px",
-    borderRadius: '10px',
+    borderRadius: "10px",
     boxShadow: "0 1px 7px rgb(128, 128, 128)",
     width: "300px",
-    position: "absolute",
-    cursor:"pointer",
+    position: "fixed",
+    top: '10px',
     left: '-120px',
+    cursor: "pointer",
     overflow: "scroll",
     backgroundColor: theme.palette.background.paper,
   },
@@ -55,8 +57,11 @@ const CreateNote3 = (props) => {
   };
   const saveCollab = () => {
     console.log(collabList);
-    props.note3("opencreatenote2");
+    props.note3("opencreatenote2", collabList);
   };
+  const closeCollab = () => {
+    props.note3("opencreatenote2",collabList);
+  }
 
   return (
     <div className="createnote3-mainContainer">
@@ -75,6 +80,16 @@ const CreateNote3 = (props) => {
             </p>
           </div>
         </div>
+        <div className="avatar-display">
+          {collabList.map((user) => (
+            <div className="avatar-display-row">
+              <Avatar style={{ backgroundColor: "black" }}>
+                <AccountCircleIcon />
+              </Avatar>
+              <p className='avatar-email-display'>{user.email}</p>
+            </div>
+          ))}
+        </div>
         <div className="logo-createnote3">
           <Avatar
             style={{ backgroundColor: "#fff", border: "1px solid black" }}
@@ -86,7 +101,7 @@ const CreateNote3 = (props) => {
             label="Person or email to share with"
             className="createnote3-account"
             name="searchWord"
-            style={{ color: "gray", width: "400px", border: "none" }}
+            style={{ color: "gray", width: "400px" }}
             onChange={openEmail}
           />
           <Popper
@@ -105,7 +120,6 @@ const CreateNote3 = (props) => {
                   <Divider />
                 </div>
               ))}
-              
             </div>
           </Popper>
         </div>
@@ -114,6 +128,7 @@ const CreateNote3 = (props) => {
             className="createnote3-button"
             type="button"
             style={{ fontSize: "large", outline: "none", border: "none" }}
+            onClick={closeCollab}
           >
             Close
           </button>

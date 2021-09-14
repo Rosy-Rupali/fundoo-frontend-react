@@ -6,11 +6,11 @@ import "../css/CreateNote1.css";
 
 const CreateNote1 = (props) => {
   const WritingNote = () => {
-    props.listentoNote1('true')
-  }
-  useEffect(() =>{
-    console.log(props)
-  },[props])
+    props.listentoNote1("true");
+  };
+  useEffect(() => {
+    console.log(props);
+  }, [props]);
   return (
     <div className="dummy-box" onClick={WritingNote}>
       <div className="dummy-createnote1">
