@@ -18,7 +18,7 @@ const DisplayNotesNew = () => {
   }, []);
 
   console.log(noteArray);
-  const noteList = noteArray.map((info) => <Notes info={info} />);
+  const noteList = noteArray.map((info) => <Notes  info={info} />);
   return <div className="displaynotenew-mainContainer">{noteList}</div>;
 };
 export default DisplayNotesNew;

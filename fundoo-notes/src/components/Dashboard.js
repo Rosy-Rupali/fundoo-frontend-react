@@ -19,12 +19,12 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
   },
   drawer: {
-    width: "170px",
+    width: "200px",
     flexShrink: 0,
     whiteSpace: "nowrap",
   },
   drawerOpen: {
-    width: "170px",
+    width: "200px",
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
