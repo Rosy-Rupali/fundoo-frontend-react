@@ -10,8 +10,8 @@ const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{8,}$/;
 const emailRegex = /^[a-z0-9.+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$/;
 const nameRegex = /^[A-Z][a-z]{2,}$/;
 class LoginPage extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       firstName: "",
       lastName: "",
@@ -134,7 +134,10 @@ class LoginPage extends Component {
       console.log(obj);
       SignUp(obj)
      .then(response =>{
+       this.props.history.push('/signin')
+       if(response.status == 200){
        console.log(response)
+       }
      })
      .catch(error =>{
        console.log(error)

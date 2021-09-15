@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Login} from '../Services/UserService'
+import { Login } from "../Services/UserService";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import "../css/SignIn.css";
@@ -7,8 +7,8 @@ import "../css/SignIn.css";
 const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{8,}$/;
 const emailRegex = /^[a-z0-9.+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$/;
 class SignIn extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: "",
       password: "",
@@ -16,7 +16,9 @@ class SignIn extends Component {
       passwordError: "",
     };
   }
-
+componentDidMount(){
+  console.log(this.props)
+}
   setEmail = (e) => {
     this.setState({
       email: e.target.value,
@@ -31,7 +33,7 @@ class SignIn extends Component {
   validateEmail = () => {
     let emailError = "";
     const value = this.state.email;
-     if (!emailRegex.test(value)) emailError = "Email is not valid";
+    if (!emailRegex.test(value)) emailError = "Email is not valid";
     this.setState({
       emailError,
     });
@@ -41,7 +43,7 @@ class SignIn extends Component {
   validatePassword = () => {
     let passwordError = "";
     const value = this.state.password;
-     if (!passwordRegex.test(value))
+    if (!passwordRegex.test(value))
       passwordError =
         "Password must contain at least 8 characters, 1 number, 1 upper and 1 lowercase!";
     this.setState({
@@ -51,8 +53,6 @@ class SignIn extends Component {
   };
 
   Next = () => {
-   
-    
     let validated = this.validateEmail();
     let validated1 = this.validatePassword();
     if (!validated || !validated1) {
@@ -64,13 +64,16 @@ class SignIn extends Component {
       };
       console.log(data);
       Login(data)
-        .then(response => {
-          console.log(response)
+        .then((response) => {
+          this.props.history.push('/dashboard')
+          if(response.status == 200){
+          console.log(response.data.id);
+          localStorage.setItem("token", response.data.id);
+          }
         })
-        .catch(error =>{
-          console.log(error)
-        })
-      
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 
@@ -123,7 +126,7 @@ class SignIn extends Component {
             </svg>
             <h3>Sign in</h3>
             <p>Use Your Google Account</p>
-         
+
             <TextField
               name="email"
               id="outlined-basic"
