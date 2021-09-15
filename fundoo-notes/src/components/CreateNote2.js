@@ -1,5 +1,5 @@
-import React, {useEffect, useState } from "react";
-import TextField from '@material-ui/core/TextField';
+import React, { useEffect, useState } from "react";
+import TextField from "@material-ui/core/TextField";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Button from "@material-ui/core/Button";
 import { WriteNote } from "../Services/DataService";
@@ -8,7 +8,7 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import "../css/CreateNote2.css";
 import NotesIcons from "./NotesIcons";
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltip from "@material-ui/core/Tooltip";
 
 const CreateNote2 = (props) => {
   const [title, settitle] = useState("");
@@ -16,9 +16,10 @@ const CreateNote2 = (props) => {
   const [description, setdescription] = useState("");
   const [colour1, setColour1] = useState("#FFF");
   const [archive1, setArchive1] = useState(false);
+  const [trash1, setTrash1] = useState(false);
   const [users, setUsers] = useState([]);
-  const[reminder, setReminder] = useState("");
-  const [collabArray, setCollabArray] = useState("")
+  const [reminder, setReminder] = useState("");
+  const [collabArray, setCollabArray] = useState([]);
   const [isPined, setIsPined] = useState(false);
   // const pin = () => {
   //   setIsPined(!isPined);
@@ -48,9 +49,10 @@ const CreateNote2 = (props) => {
       title: title,
       description: description,
       isArchived: archive1,
+      // isDeleted: trash1,
       color: colour1,
       collaberators: collabArray,
-      reminder: reminder,
+      // reminder: reminder,
     };
     WriteNote(obj)
       .then((response) => {
@@ -67,7 +69,7 @@ const CreateNote2 = (props) => {
     if (data === "opencreatenote2") {
       console.log(JSON.stringify(collabList));
       setCreateNote(!createNote);
-      setCollabArray(collabList)
+      setCollabArray(collabList);
     }
   };
 
@@ -79,23 +81,26 @@ const CreateNote2 = (props) => {
     console.log({ colour1 });
   }, [colour1]);
 
-
   const displayReminder = (date, time) => {
-    let a = date.concat('T');
+    let a = date.concat("T");
     let b = time;
-    setReminder(a.concat(b))
+    setReminder(a.concat(b));
     console.log(reminder);
-  }
-
+  };
+  // const trash = (data) => {
+  //   console.log(data);
+  //   setTrash1(data);
+  // };
+  const close = () => {};
   return (
     <ClickAwayListener onClickAway={handleClickAwayEvent}>
       <div className="takenormalnote">
         {createNote ? (
-          <div
-            className="createnote2-mainContainer"
-            style={{ backgroundColor: colour1 }}
-          >
-            <div className="createnote2-testContainer">
+          <div className="createnote2-mainContainer">
+            <div
+              className="createnote2-testContainer"
+              style={{ backgroundColor: colour1 }}
+            >
               <div className="title-createnote2">
                 <input
                   id="para-createnote2"
@@ -120,21 +125,30 @@ const CreateNote2 = (props) => {
                   style={{ backgroundColor: "transparent" }}
                 />
               </p>
-              <div className='user-account'>{users.map((user) => (
-                <Tooltip title={user.email}>
-                 <span><AccountCircleIcon /> </span>
-                 </Tooltip>
-              ))} </div>
+              <div className="user-account">
+                {users.map((user) => (
+                  <Tooltip title={user.email}>
+                    <span>
+                      <AccountCircleIcon />
+                    </span>
+                  </Tooltip>
+                ))}
+              </div>
+              <div className="reminder-display">{displayReminder}</div>
               <div className="createnote-closeButton">
                 <NotesIcons
                   archive={archive}
                   color={color}
                   Collaborator={collaborator}
                   reminder={displayReminder}
-                  action='createnote'
+                  // trash={trash}
+                  action="createnote"
                 />
-
-                <Button onClick={closeButton} style={{ fontSize: "small" }}>
+                <Button
+                  onClick={closeButton}
+                  close={close}
+                  style={{ fontSize: "small" }}
+                >
                   Close
                 </Button>
               </div>
@@ -142,7 +156,11 @@ const CreateNote2 = (props) => {
           </div>
         ) : (
           <div>
-            <CreateNote3 note3={openCreateNote2} updateuser={setUsers} collablist={users} />
+            <CreateNote3
+              note3={openCreateNote2}
+              updateuser={setUsers}
+              collablist={users}
+            />
           </div>
         )}
       </div>
