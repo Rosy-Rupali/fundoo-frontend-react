@@ -3,6 +3,7 @@ import ColorLensOutlinedIcon from "@material-ui/icons/ColorLensOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 import Popper from "@material-ui/core/Popper";
 import { getThemeProps } from "@material-ui/styles";
+import { changeColorNotes } from "../Services/DataService";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -45,13 +46,31 @@ export default function SimpleColourPopper(props) {
 
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
+  };
+
+  const getColor = (event) => {
     setColor(event.target.id);
-    props.color(color);
     console.log(event.target.id);
+    if(props.actionColor === 'createnote'){
+      props.color(color);
+    }else if (props.actionColor === 'updatenote'){
+      let obj = {
+        color: color,
+        noteIdList: [props.id1]
+      };
+      changeColorNotes(obj)
+        .then((response) => {
+          props.details();
+          console.log(response);
+         
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popper" : undefined;
 
   return (
     <div>
@@ -59,7 +78,12 @@ export default function SimpleColourPopper(props) {
         style={{ fontSize: "medium" }}
         onClick={handleClick}
       />
-      <Popper id={id} open={open} anchorEl={anchorEl}>
+      <Popper
+        onClick={getColor}
+        id={open ? "simple-popper" : undefined}
+        open={open}
+        anchorEl={anchorEl}
+      >
         <div className={classes.paper}>
           {colorArray.map((color) => (
             <div

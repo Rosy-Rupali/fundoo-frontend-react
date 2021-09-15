@@ -18,11 +18,15 @@ export default function SimpleSnackbar(props) {
       props.archive(isArchive);
     } else if (props.actionArchive === "updatenote") {
       let obj = {
-        isArchived: isArchive,
+        isArchived: true,
+        noteIdList: [props.id1]
       };
+      console.log(obj)
       archiveNotes(obj)
         .then((response) => {
+          props.details()
           console.log(response);
+         
         })
         .catch((error) => {
           console.log(error);
@@ -34,7 +38,6 @@ export default function SimpleSnackbar(props) {
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
   };
 
