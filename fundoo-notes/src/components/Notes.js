@@ -7,20 +7,10 @@ import { withStyles } from "@material-ui/core/styles";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import MuiDialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import "../css/Notes.css";
+import { updateNotes } from "../Services/DataService";
 
-const styles = (theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(200),
-  },
-  closeButton: {
-    position: "absolute",
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
-  },
-});
 const DialogContent = withStyles((theme) => ({
   root: {
     width: 500,
@@ -28,8 +18,13 @@ const DialogContent = withStyles((theme) => ({
 }))(MuiDialogContent);
 
 const Notes = (props) => {
+  const [id1, setId] = useState(props.info.id)
   const [newNote, setNewNote] = useState(false);
   const [open, setOpen] = useState(false);
+  const [noteTitle1, setNoteTitle] = useState(props.info.title);
+  const [noteDescription1, setNoteDescription] = useState(
+    props.info.description
+  );
 
   const newNote2 = (data) => {
     setNewNote(!newNote);
@@ -40,6 +35,25 @@ const Notes = (props) => {
   };
   const handleClose = () => {
     setOpen(false);
+    let noteUpdateData = new FormData(); // Currently empty
+    noteUpdateData.append("noteId", id1);
+    noteUpdateData.append("title", noteTitle1);
+    noteUpdateData.append("description", noteDescription1);
+    updateNotes(noteUpdateData)
+      .then((response) => {
+        console.log(response);
+        props.displayNote();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const noteTitle = (e) => {
+    setNoteTitle(e.target.value);
+  };
+
+  const noteDescription = (e) => {
+    setNoteDescription(e.target.value);
   };
 
   return (
@@ -62,7 +76,11 @@ const Notes = (props) => {
               alt="pin-pic">{props.info.isPined}</img> */}
             </div>
             <div className="note2-paragraph"> {props.info.description}</div>
-            <NotesIcons action="updatenote" noteDetails={props.info} />
+            <NotesIcons
+              action="updatenote"
+              id={props.info.id}
+              noteDetails={props.info}
+            />
           </div>
         ) : (
           <div
@@ -79,21 +97,31 @@ const Notes = (props) => {
       <div className="note-dialogContent">
         <Dialog
           onClose={handleClose}
-          aria-labelledby="customized-dialog-title"
           open={open}
         >
           <DialogTitle
-            id="customized-dialog-title"
             onClose={handleClose}
             style={{ backgroundColor: props.info.color }}
           >
-            {props.info.title}
+            <TextareaAutosize
+              defaultValue={props.info.title}
+              onChange={noteTitle}
+              style={{ border: "none", backgroundColor: props.info.color }}
+            />
           </DialogTitle>
           <DialogContent style={{ backgroundColor: props.info.color }}>
-            {props.info.description}
+            <TextareaAutosize
+              defaultValue={props.info.description}
+              onChange={noteDescription}
+              style={{ border: "none", backgroundColor: props.info.color }}
+            />
           </DialogContent>
           <DialogActions style={{ backgroundColor: props.info.color }}>
-            <NotesIcons />
+            <NotesIcons
+              action="updatenote"
+              noteDetails={props.info}
+              id1={props.info.id}
+            />
             <Button onClick={handleClose} color="primary">
               close
             </Button>

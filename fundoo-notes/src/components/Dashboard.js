@@ -65,6 +65,11 @@ function DashBoard() {
       setOpenNote(!openNote);
     }
   };
+
+  const notesId = () => {
+    
+  }
+
   const handleClickAwayEventDashboard = () => {};
   return (
     <div class="dashboard-main-container">
@@ -125,7 +130,7 @@ function DashBoard() {
         )}
       </div>
       <div className="displaynote-container">
-        <DisplayNotesNew />
+        <DisplayNotesNew notesId={notesId}  />
       </div>
     </div>
   );

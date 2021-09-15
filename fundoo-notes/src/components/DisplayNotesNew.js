@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import Notes from "./Notes";
 import "../css/DisplayNoteNew.css";
 import { getNote } from "../Services/DataService";
+import { getThemeProps } from "@material-ui/styles";
 
-const DisplayNotesNew = () => {
+const DisplayNotesNew = (props) => {
   const [noteArray, setArray] = React.useState([]);
 
-  useEffect(() => {
+  const displayNote = () => {
     getNote()
       .then((response) => {
         setArray(response.data.data.data);
@@ -15,10 +16,16 @@ const DisplayNotesNew = () => {
       .catch((error) => {
         console.log(error);
       });
+  };
+  useEffect(() => {
+    displayNote();
   }, []);
 
+  
   console.log(noteArray);
-  const noteList = noteArray.map((info) => <Notes  info={info} />);
+  const noteList = noteArray.map((info) => (
+    <Notes noteId={props.noteId} displayNote={displayNote} info={info} />
+  ));
   return <div className="displaynotenew-mainContainer">{noteList}</div>;
 };
 export default DisplayNotesNew;
