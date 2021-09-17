@@ -1,13 +1,13 @@
 .mainContainer {
   width: 22vw;
 }
-.testContainer {
- 
+.testContainer-note {
   width: 100%;
   display: flex !important;
   flex-direction: row !important;
   justify-content: space-around !important;
   align-items: center !important;
+  margin-bottom: 7%;
 }
 .mainNote {
   max-height: 100%;
@@ -18,15 +18,31 @@
   word-wrap: break-word !important;
   flex-wrap: wrap;
   justify-content: space-around;
-  box-shadow: 0rem 0.25rem 0.5rem  rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0rem 0.25rem 0.5rem rgba(0, 0, 0, 0.08) !important;
 }
 #noteHeader {
   padding-left: 5%;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-.noteContent{
+.noteContent {
   max-width: 90%;
-  border: 2px solid pink;
   font-family: Verdana, Geneva, Tahoma, sans-serif !important;
   word-wrap: break-word !important;
+}
+
+@media screen and (max-width: 800px) {
+  .testContainer-note {
+    justify-content: space-between;
+    align-items: center;
+    width: 120%;
+    margin-bottom: 10%;
+  }
+
+  .mainNote {
+    width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+ 
 }

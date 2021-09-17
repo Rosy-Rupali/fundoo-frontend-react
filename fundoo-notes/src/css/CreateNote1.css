@@ -1,5 +1,5 @@
 .dummy-box {
-  height: 20vh;
+  height: auto;
   width: 45vw;
 }
 .dummy-createnote1 {
@@ -27,4 +27,10 @@
   justify-content: space-between;
   color: grey;
   padding-right: 3%;
+}
+@media screen and (max-width: 800px) {
+  .dummy-createnote1{
+    width: 150%;
+  
+  }
 }

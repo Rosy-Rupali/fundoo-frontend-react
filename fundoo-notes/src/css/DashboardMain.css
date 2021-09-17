@@ -1,15 +1,65 @@
 .dashboard-main-container {
   height: 100vh;
   width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+.dashboard-header {
+  height: 25%;
+  width: 100%;
+  border: 1px solid grey;
 }
 .createnote-container {
-  height: 25%;
-  width: 50%;
+  height: auto;
+  width: 40%;
+  word-wrap: break-word;
   margin-left: 25%;
+  position: relative;
+  bottom: 60%;
 }
-/* .displaynote-container{
-    height: 40vh;
-    width: 70vw;
-    margin-left: 15%;
-    border: 5px solid blue;
-} */
+.container-sideNavBar {
+  width: 10%;
+}
+.displaynote-container {
+  height: auto;
+  width: 70%;
+  margin-left: 15%;
+  word-wrap: break-word;
+  position: relative;
+  bottom: 40%;
+}
+
+@media screen and (max-width: 800px) {
+  .dashboard-header {
+    width: 100%;
+    align-self: center;
+    justify-content: center;
+  }
+  .container-sideNavBar{
+    margin-left: 2%;
+  }
+  .createnote-container {
+    margin-top: 5%;
+    width: 70%;
+    margin-right: 5%;
+    align-self: center;
+    justify-content: center;
+  }
+  .displaynote-container {
+    height: auto;
+    width: 70%;
+    align-self: center;
+    justify-content: center;
+    word-wrap: break-word;
+    position: relative;
+    bottom: 50%;
+  }
+}
+@media screen and (max-width: 400px) {
+  .container-sideNavBar {
+    width: 50%;
+  }
+  .displaynote-container {
+    width: 100%;
+  }
+}

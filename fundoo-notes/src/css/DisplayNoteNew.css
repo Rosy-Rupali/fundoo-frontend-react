@@ -1,14 +1,29 @@
 .displaynotenew-mainContainer {
   height: auto;
-  width: 80vw;
+  width: 70vw;
   word-wrap: break-word !important;
 }
-.testContainer{
-  width: 100%;
+.testContainer {
+  width: 120%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-evenly;
   margin-bottom: 5%;
+}
+@media screen and (max-width: 800px) {
+  
+  .testContainer {
+    width: 80%;
+    align-self: center;
+    justify-content: space-around;
+  }
+}
+@media screen and (max-width: 400px) {
+  .testContainer {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
 }

@@ -1,19 +1,22 @@
 .createnote2-mainContainer {
-  height: 25vh;
+  height: auto;
   width: 45vw;
 }
 .createnote2-testContainer {
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
   border-radius: 10px;
   box-shadow: 0 1px 7px rgb(128, 128, 128);
+  word-wrap: break-word;
 }
 .title-createnote2 {
   height: 30%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   padding-left: 3%;
+  padding-top: 3%;
   justify-content: space-between;
 }
 #forminput2 {
@@ -21,12 +24,12 @@
   outline: none;
   font-size: 15px;
   font-family: Arial, Helvetica, sans-serif;
-  width: 90%;
-  padding-left: 3%;
+  width: 100% !important;
+  padding-left: 12%;
 }
 #para-createnote2 {
   height: 50%;
-  width: 100%;
+  width: 100px !important;
   border: none;
   outline: none;
   align-self: center;
@@ -48,8 +51,16 @@
   height: 60%;
 }
 .createnote-closeButton {
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding-right: 3%;
+  padding-bottom: 1%;
+}
+
+@media screen and (max-width: 800px) {
+  .createnote2-testContainer{
+    width: 150%;
+  }
 }
