@@ -1,34 +1,32 @@
-.Note2-mainContainer {
-  height: 23vh;
-  width: 20vw;
+.mainContainer {
+  width: 22vw;
 }
-.note-testMainContainer {
-  height: 90%;
+.testContainer {
+ 
   width: 100%;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-around !important;
+  align-items: center !important;
 }
-.note2-testContainer {
-  height: 100%;
+.mainNote {
+  max-height: 100%;
   width: 100%;
-  border: 1px solid gray;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-evenly;
+  border-radius: 15px;
+  display: flex !important;
+  flex-direction: column !important;
+  word-wrap: break-word !important;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  box-shadow: 0rem 0.25rem 0.5rem  rgba(0, 0, 0, 0.08) !important;
 }
-
-.note2-title {
-  height: 20%;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+#noteHeader {
+  padding-left: 5%;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
-.note2-paragraph {
-  height: 70%;
-  width: 100%;
-}
-#notes-pin {
-  height: 60%;
+.noteContent{
+  max-width: 90%;
+  border: 2px solid pink;
+  font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+  word-wrap: break-word !important;
 }

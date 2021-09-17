@@ -1,11 +1,14 @@
 .displaynotenew-mainContainer {
-  height: 70vh;
-  width: 70vw;
-  margin-top: 15%;
-  margin-left: 20%;
+  height: auto;
+  width: 80vw;
+  word-wrap: break-word !important;
+}
+.testContainer{
+  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-around;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  margin-bottom: 5%;
 }
