@@ -35,7 +35,7 @@
     align-self: center;
     justify-content: center;
   }
-  .container-sideNavBar{
+  .container-sideNavBar {
     margin-left: 2%;
   }
   .createnote-container {
@@ -56,10 +56,24 @@
   }
 }
 @media screen and (max-width: 400px) {
+  .dashboard-header {
+    width: 100%;
+    align-self: flex-start;
+    justify-content: space-around;
+  }
   .container-sideNavBar {
-    width: 50%;
+    width: 20%;
+  }
+  .createnote-container {
+    width: 80%;
   }
   .displaynote-container {
-    width: 100%;
+    height: auto;
+    width: 80%;
+    align-self: center;
+    justify-content: center;
+    word-wrap: break-word;
+    position: relative;
+    bottom: 50%;
   }
 }

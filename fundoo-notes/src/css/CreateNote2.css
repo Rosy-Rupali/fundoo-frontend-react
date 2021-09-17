@@ -64,3 +64,13 @@
     width: 150%;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .createnote2-testContainer{
+    width: 170%;
+    align-self: flex-start;
+    justify-content: space-between;
+    
+  }
+}
+

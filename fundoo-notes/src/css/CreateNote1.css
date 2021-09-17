@@ -29,8 +29,19 @@
   padding-right: 3%;
 }
 @media screen and (max-width: 800px) {
-  .dummy-createnote1{
+  .dummy-createnote1 {
     width: 150%;
-  
+  }
+}
+@media screen and (max-width: 400px) {
+  .dummy-createnote1 {
+    width: 170%;
+    font-size: 10px;
+    align-self: flex-start;
+    justify-content: space-between;
+  }
+  .icons-createnote1 {
+    width: 5%;
+    margin-right: 23%;
   }
 }
