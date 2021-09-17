@@ -24,7 +24,8 @@ export default function SimpleSnackbar(props) {
       console.log(obj)
       archiveNotes(obj)
         .then((response) => {
-          props.details()
+          props.displayNote();
+          props.details();
           console.log(response);
          
         })

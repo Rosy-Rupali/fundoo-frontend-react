@@ -26,11 +26,6 @@ const DisplayNotesNew = (props) => {
             (note) => note.isDeleted == true && note.isArchived == false
           );
           setArray(arr);
-        } else {
-          arr = arr1.filter(
-            (note) => note.isDeleted == false && note.isArchived == false
-          );
-          setArray(arr);
         }
         console.log(noteArray);
       })
@@ -46,15 +41,19 @@ const DisplayNotesNew = (props) => {
     } else {
       displayNote(" ");
     }
-  }, [props]);
+  }, [props.archiveOpen]);
 
   useEffect(() => {
     console.log("allhello", props);
-    if (props.trashOpen == "trash") {
+    if (props.trashOpen == true) {
       displayNote("trash");
     } else {
       displayNote(" ");
     }
+  }, [props.trashOpen]);
+
+  useEffect(() => {
+    displayNote();
   }, [props]);
 
   console.log(noteArray);

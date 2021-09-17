@@ -2,7 +2,6 @@ import React from "react";
 import ColorLensOutlinedIcon from "@material-ui/icons/ColorLensOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 import Popper from "@material-ui/core/Popper";
-import { getThemeProps } from "@material-ui/styles";
 import { changeColorNotes } from "../Services/DataService";
 
 const useStyles = makeStyles((theme) => ({
@@ -51,18 +50,18 @@ export default function SimpleColourPopper(props) {
   const getColor = (event) => {
     setColor(event.target.id);
     console.log(event.target.id);
-    if(props.actionColor === 'createnote'){
+    let obj = {
+      color: color,
+      noteIdList: [props.id2],
+    };
+    if (props.actionColor === "createnote") {
       props.color(color);
-    }else if (props.actionColor === 'updatenote'){
-      let obj = {
-        color: color,
-        noteIdList: [props.id1]
-      };
+    } else if (props.actionColor === "updatenote") {
+      console.log(obj, "hoooooo");
       changeColorNotes(obj)
         .then((response) => {
-          props.details();
+          props.displayNote();
           console.log(response);
-         
         })
         .catch((error) => {
           console.log(error);

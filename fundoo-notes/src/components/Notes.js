@@ -24,23 +24,20 @@ const DialogContent = withStyles((theme) => ({
 }))(MuiDialogContent);
 
 const Notes = (props) => {
-  const [id1, setId] = useState(props.info.id);
+  const [id1, setId1] = useState(props.info.id);
+  const [id, setid] = useState(props.info.id);
   const [show, setShown] = useState(false);
-  const [newNote, setNewNote] = useState(false);
   const [open, setOpen] = useState(false);
   const [noteTitle1, setNoteTitle] = useState(props.info.title);
   const [noteDescription1, setNoteDescription] = useState(
     props.info.description
   );
-  const [collavb, setCollavb] = useState([]);
+  const [collavb, setCollavb] = useState(props.info.collaborators);
 
-  // const newNote2 = (data) => {
-  //   setNewNote(!newNote);
-  //   console.log(data);
-  // };
   const handleClickOpen = () => {
     setOpen(true);
   };
+
   const handleClose = () => {
     setOpen(false);
     let noteUpdateData = new FormData(); // Currently empty
@@ -64,14 +61,9 @@ const Notes = (props) => {
   const noteDescription = (e) => {
     setNoteDescription(e.target.value);
   };
-  // const change1 = (e) => {
-  //   e.target.style.boxShadow = " 0 0.25rem 0.5rem rgba(0, 0, 0, 0.08)";
-  //     e.target.style.border = "1px solid #dfe4e9";
-
-  // };
   return (
     <div className="mainContainer">
-      <div className="testContainer">
+      <div className="testContainer-note">
         <Card
           style={{ backgroundColor: props.info.color }}
           className="mainNote"
@@ -79,7 +71,7 @@ const Notes = (props) => {
           onMouseLeave={() => setShown(false)}
         >
           <h4 id="noteHeader" onClick={handleClickOpen}>
-           {props.info.title}
+            {props.info.title}
           </h4>
           <CardContent className="noteContent" onClick={handleClickOpen}>
             <Typography>{props.info.description} </Typography>
@@ -99,6 +91,7 @@ const Notes = (props) => {
                 action="updatenote"
                 noteDetails={props.info}
                 id={props.info.id}
+                displayNote={props.displayNote}
               />
             )}
           </CardActions>

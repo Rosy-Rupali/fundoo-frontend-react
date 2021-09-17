@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "../components/CreateNote3";
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
@@ -13,32 +12,37 @@ import CloseIcon from "@material-ui/icons/Close";
 import "../css/NotesIcons.css";
 import DateNTimePickers from "./DateNTimePicker";
 import { trashNotes } from "../Services/DataService";
-import { useHistory } from "react-router";
 
 const NotesIcons = (props) => {
   const [open, setOpen] = React.useState(false);
   const [trash, setIsTrashed] = React.useState(false);
 
   const handleCollaborator = () => {
-    props.Collaborator();
+    if (props.action == "createnote") {
+      props.Collaborator();
+    } else  if(props.action == 'updatenote') {
+      let obj = {
+        
+      }
+    }
   };
 
   const handleTrash = () => {
     setIsTrashed(true);
     setOpen(true);
+    
     console.log(props.trash, "hello");
     if (props.action === "createnote") {
       props.trash();
     } else if (props.action === "updatenote") {
       let obj = {
         isDeleted: true,
-        noteIdList: [props.id1]
+        noteIdList: [props.id],
       };
       trashNotes(obj)
         .then((response) => {
-          props.noteDetails();
+          props.displayNote();
           console.log(response);
-          
         })
         .catch((error) => {
           console.log(error);
@@ -70,20 +74,22 @@ const NotesIcons = (props) => {
           color={props.color}
           actionColor={props.action}
           details={props.noteDetails}
-          id1={props.id1}
+          id2={props.id}
+          displayNote={props.displayNote}
         />
         <ImageOutlinedIcon style={{ fontSize: "medium" }} />
         <SimpleSnackbar
           archive={props.archive}
           actionArchive={props.action}
           details={props.noteDetails}
-          id1={props.id1}
+          id1={props.id}
+          displayNote={props.displayNote}
         />
+
         <DeleteOutlineOutlinedIcon
           style={{ fontSize: "medium" }}
           onClick={handleTrash}
           trash={props.trash}
-          id={props.id1}
         />
         <Snackbar
           anchorOrigin={{
@@ -115,4 +121,4 @@ const NotesIcons = (props) => {
     </div>
   );
 };
-export default NotesIcons;
+export default NotesIcons
