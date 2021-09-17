@@ -6,7 +6,6 @@ import ViewAgendaOutlinedIcon from "@material-ui/icons/ViewAgendaOutlined";
 import SettingsIcon from "@material-ui/icons/Settings";
 import AppsIcon from "@material-ui/icons/Apps";
 import "../css/DashboardHeader.css";
-import { getThemeProps } from "@material-ui/styles";
 
 function DashboardHeader(props) {
   const navigationtoggle = () => {
@@ -25,12 +24,12 @@ function DashboardHeader(props) {
       <div className="searchsection">
         <SearchBar placeholder="search" />
       </div>
-      <div className="dashboard">
+      <div className="dashboard" >
         <RefreshRoundedIcon />
         <ViewAgendaOutlinedIcon className="icons" />
         <SettingsIcon />
       </div>
-      <div className="dashboard">
+      <div className="dashboard" id="text-icons3">
         <AppsIcon />
         <img
           src="https://lh3.googleusercontent.com/ogw/ADea4I6JTDF1nhao1eahgtEuabHZOUDW5B54Zb2hSLx4=s32-c-mo"

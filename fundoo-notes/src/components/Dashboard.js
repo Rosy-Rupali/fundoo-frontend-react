@@ -22,9 +22,12 @@ const useStyles = makeStyles((theme) => ({
     width: "200px",
     flexShrink: 0,
     whiteSpace: "nowrap",
+    
   },
   drawerOpen: {
     width: "200px",
+    position: 'relative !important',
+    bottom: '110px',
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -32,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
 
     border: "none !important",
     paddingLeft: 0,
-    boxShadow: "0rem 0.5rem 1rem rgba(100,100,100,0.1) !important",
     marginTop: 110,
   },
   drawerClose: {
@@ -42,13 +44,18 @@ const useStyles = makeStyles((theme) => ({
     }),
     overflowX: "hidden",
     width: theme.spacing(6.7),
-    marginTop: 110,
+    marginTop: 55,
+    position: 'relative !important',
+    bottom: '100px !important',
     border: "none !important",
   },
 }));
+
 function DashBoard() {
   const [openNote, setOpenNote] = useState(false);
   const [handleDrawer1, setHandleDrawer] = useState(false);
+  const [archiveDrawer, setarchiveDrawer] = useState(false);
+  const [trashDrawer, settrashDrawer] = useState(false);
   const classes = useStyles();
 
   const handleDrawer = () => {
@@ -66,10 +73,16 @@ function DashBoard() {
     }
   };
 
-  const notesId = () => {
-    
-  }
-
+  const drawerArchive = () => {
+    console.log("openarchive");
+    setarchiveDrawer(!archiveDrawer);
+    console.log(archiveDrawer);
+  };
+  const drawerTrash = () => {
+    console.log("opentrash");
+    settrashDrawer(!trashDrawer);
+    console.log(trashDrawer);
+  };
   const handleClickAwayEventDashboard = () => {};
   return (
     <div class="dashboard-main-container">
@@ -106,8 +119,8 @@ function DashBoard() {
                     </svg>
                     <NotificationsNoneSharpIcon />
                     <CreateOutlinedIcon />
-                    <ArchiveOutlinedIcon />
-                    <DeleteOutlinedIcon />
+                    <ArchiveOutlinedIcon onClick={drawerArchive} />
+                    <DeleteOutlinedIcon onClick={drawerTrash} />
                   </div>
                   <div id="block2">
                     <span>Notes</span>
@@ -130,7 +143,7 @@ function DashBoard() {
         )}
       </div>
       <div className="displaynote-container">
-        <DisplayNotesNew notesId={notesId}  />
+        <DisplayNotesNew archiveOpen={archiveDrawer} trashOpen={trashDrawer} />
       </div>
     </div>
   );
