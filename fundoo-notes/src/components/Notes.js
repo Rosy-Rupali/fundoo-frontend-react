@@ -8,8 +8,14 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import MuiDialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
 import "../css/Notes.css";
 import { updateNotes } from "../Services/DataService";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const DialogContent = withStyles((theme) => ({
   root: {
@@ -18,18 +24,20 @@ const DialogContent = withStyles((theme) => ({
 }))(MuiDialogContent);
 
 const Notes = (props) => {
-  const [id1, setId] = useState(props.info.id)
+  const [id1, setId] = useState(props.info.id);
+  const [show, setShown] = useState(false);
   const [newNote, setNewNote] = useState(false);
   const [open, setOpen] = useState(false);
   const [noteTitle1, setNoteTitle] = useState(props.info.title);
   const [noteDescription1, setNoteDescription] = useState(
     props.info.description
   );
+  const [collavb, setCollavb] = useState([]);
 
-  const newNote2 = (data) => {
-    setNewNote(!newNote);
-    console.log(data);
-  };
+  // const newNote2 = (data) => {
+  //   setNewNote(!newNote);
+  //   console.log(data);
+  // };
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -48,6 +56,7 @@ const Notes = (props) => {
         console.log(error);
       });
   };
+
   const noteTitle = (e) => {
     setNoteTitle(e.target.value);
   };
@@ -55,50 +64,49 @@ const Notes = (props) => {
   const noteDescription = (e) => {
     setNoteDescription(e.target.value);
   };
+  // const change1 = (e) => {
+  //   e.target.style.boxShadow = " 0 0.25rem 0.5rem rgba(0, 0, 0, 0.08)";
+  //     e.target.style.border = "1px solid #dfe4e9";
 
+  // };
   return (
-    <div className="Note2-mainContainer">
-      <div
-        className="note-testMainContainer"
-        onClick={handleClickOpen}
-        onMouseEnter={() => newNote2(props.info)}
-      >
-        {newNote ? (
-          <div
-            className="note2-testContainer"
-            style={{ backgroundColor: props.info.color }}
-          >
-            <div className="note2-title">
-              <h3>{props.info.title}</h3>
-              {/* <img
-              id="pin-createnote2"
-              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICA8cGF0aCBmaWxsPSJub25lIiBkPSJNMCAwaDI0djI0SDB6Ii8+CiAgPHBhdGggZmlsbD0iIzAwMCIgZD0iTTE3IDR2N2wyIDN2MmgtNnY1bC0xIDEtMS0xdi01SDV2LTJsMi0zVjRjMC0xLjEuOS0yIDItMmg2YzEuMTEgMCAyIC44OSAyIDJ6TTkgNHY3Ljc1TDcuNSAxNGg5TDE1IDExLjc1VjRIOXoiLz4KPC9zdmc+Cg=="
-              alt="pin-pic">{props.info.isPined}</img> */}
-            </div>
-            <div className="note2-paragraph"> {props.info.description}</div>
-            <NotesIcons
-              action="updatenote"
-              id={props.info.id}
-              noteDetails={props.info}
-            />
-          </div>
-        ) : (
-          <div
-            className="note2-testContainer"
-            style={{ backgroundColor: props.info.color }}
-          >
-            <div className="note2-title">
-              <h3>{props.info.title}</h3>
-            </div>
-            <div className="note2-paragraph"> {props.info.description}</div>
-          </div>
-        )}
-      </div>
-      <div className="note-dialogContent">
-        <Dialog
-          onClose={handleClose}
-          open={open}
+    <div className="mainContainer">
+      <div className="testContainer">
+        <Card
+          style={{ backgroundColor: props.info.color }}
+          className="mainNote"
+          onMouseOver={() => setShown(true)}
+          onMouseLeave={() => setShown(false)}
         >
+          <h4 id="noteHeader" onClick={handleClickOpen}>
+           {props.info.title}
+          </h4>
+          <CardContent className="noteContent" onClick={handleClickOpen}>
+            <Typography>{props.info.description} </Typography>
+          </CardContent>
+          <div>
+            {collavb.map((user) => {
+              <Tooltip title={user.email}>
+                <span>
+                  <AccountCircleIcon />
+                </span>
+              </Tooltip>;
+            })}
+          </div>
+          <CardActions className="note-icons">
+            {show && (
+              <NotesIcons
+                action="updatenote"
+                noteDetails={props.info}
+                id={props.info.id}
+              />
+            )}
+          </CardActions>
+        </Card>
+      </div>
+
+      <div className="note-dialogContent">
+        <Dialog onClose={handleClose} open={open}>
           <DialogTitle
             onClose={handleClose}
             style={{ backgroundColor: props.info.color }}
@@ -106,14 +114,24 @@ const Notes = (props) => {
             <TextareaAutosize
               defaultValue={props.info.title}
               onChange={noteTitle}
-              style={{ border: "none", backgroundColor: props.info.color }}
+              style={{
+                border: "none",
+                outline: "none",
+                width: "95%",
+                backgroundColor: props.info.color,
+              }}
             />
           </DialogTitle>
           <DialogContent style={{ backgroundColor: props.info.color }}>
             <TextareaAutosize
               defaultValue={props.info.description}
               onChange={noteDescription}
-              style={{ border: "none", backgroundColor: props.info.color }}
+              style={{
+                border: "none",
+                outline: "none",
+                width: "95%",
+                backgroundColor: props.info.color,
+              }}
             />
           </DialogContent>
           <DialogActions style={{ backgroundColor: props.info.color }}>
