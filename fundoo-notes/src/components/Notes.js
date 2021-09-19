@@ -25,8 +25,6 @@ const DialogContent = withStyles((theme) => ({
 
 const Notes = (props) => {
   const [id1, setId1] = useState(props.info.id);
-  const [id, setid] = useState(props.info.id);
-  const [show, setShown] = useState(false);
   const [open, setOpen] = useState(false);
   const [noteTitle1, setNoteTitle] = useState(props.info.title);
   const [noteDescription1, setNoteDescription] = useState(
@@ -67,8 +65,6 @@ const Notes = (props) => {
         <Card
           style={{ backgroundColor: props.info.color }}
           className="mainNote"
-          onMouseOver={() => setShown(true)}
-          onMouseLeave={() => setShown(false)}
         >
           <h4 id="noteHeader" onClick={handleClickOpen}>
             {props.info.title}
@@ -86,14 +82,12 @@ const Notes = (props) => {
             })}
           </div>
           <CardActions className="note-icons">
-            {show && (
               <NotesIcons
                 action="updatenote"
                 noteDetails={props.info}
                 id={props.info.id}
                 displayNote={props.displayNote}
               />
-            )}
           </CardActions>
         </Card>
       </div>
