@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import TextField from "@material-ui/core/TextField";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Button from "@material-ui/core/Button";
@@ -21,9 +21,12 @@ const CreateNote2 = (props) => {
   const [reminder, setReminder] = useState("");
   const [collabArray, setCollabArray] = useState([]);
   const [isPined, setIsPined] = useState(false);
+  const [noteAlert, setNoteAlert] = useState(false);
   // const pin = () => {
   //   setIsPined(!isPined);
   // };
+  const titleInput = useRef(null);
+  const descriptionInput = useRef(null);
 
   const archive = (data) => {
     setArchive1(data);
@@ -45,13 +48,20 @@ const CreateNote2 = (props) => {
   };
 
   const closeButton = () => {
+    let titleValue = titleInput.current.value;
+    let descriptionValue = descriptionInput.current.value;
+    titleValue === "" ? alert("please give the title to note") : setNoteAlert(!noteAlert);
+    descriptionValue === ""
+      ? alert("please give the description to note")
+      : setNoteAlert(!noteAlert);
+
     let obj = {
       title: title,
       description: description,
       isArchived: archive1,
-      // isDeleted: trash1,
+      isDeleted: trash1,
       color: colour1,
-      collaberators: collabArray,
+      collaberator: collabArray,
       // reminder: reminder,
     };
     WriteNote(obj)
@@ -61,14 +71,15 @@ const CreateNote2 = (props) => {
       .catch((error) => {
         console.log(error);
       });
+    props.listentoNote2("true");
   };
   const collaborator = () => {
     setCreateNote(!createNote);
   };
   const openCreateNote2 = (data, collabList) => {
     if (data === "opencreatenote2") {
-      console.log(JSON.stringify(collabList));
       setCreateNote(!createNote);
+      console.log(JSON.stringify(collabList));
       setCollabArray(collabList);
     }
   };
@@ -87,11 +98,10 @@ const CreateNote2 = (props) => {
     setReminder(a.concat(b));
     console.log(reminder);
   };
-  // const trash = (data) => {
-  //   console.log(data);
-  //   setTrash1(data);
-  // };
-  const close = () => {};
+  const trash = (data) => {
+    console.log(data);
+    setTrash1(data);
+  };
   return (
     <ClickAwayListener onClickAway={handleClickAwayEvent}>
       <div className="takenormalnote">
@@ -103,8 +113,10 @@ const CreateNote2 = (props) => {
             >
               <div className="title-createnote2">
                 <input
+                  ref={titleInput}
                   id="para-createnote2"
                   type="text"
+                  value={title}
                   placeholder="Title"
                   onChange={setTitle}
                   name="title"
@@ -118,9 +130,10 @@ const CreateNote2 = (props) => {
               </div>
               <p>
                 <TextareaAutosize
+                  ref={descriptionInput}
                   id="forminput2"
-                  aria-label="empty textarea"
                   placeholder="Take a note..."
+                  value={description}
                   onChange={setDescription}
                   style={{ backgroundColor: "transparent" }}
                 />
@@ -141,14 +154,10 @@ const CreateNote2 = (props) => {
                   color={color}
                   Collaborator={collaborator}
                   reminder={displayReminder}
-                  // trash={trash}
+                  trash={trash}
                   action="createnote"
                 />
-                <Button
-                  onClick={closeButton}
-                  close={close}
-                  style={{ fontSize: "small" }}
-                >
+                <Button onClick={closeButton} style={{ fontSize: "small" }}>
                   Close
                 </Button>
               </div>

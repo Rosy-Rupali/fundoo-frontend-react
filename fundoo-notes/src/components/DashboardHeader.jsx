@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import DehazeIcon from "@material-ui/icons/Dehaze";
 import SearchBar from "material-ui-search-bar";
 import RefreshRoundedIcon from "@material-ui/icons/RefreshRounded";
@@ -6,15 +6,15 @@ import ViewAgendaOutlinedIcon from "@material-ui/icons/ViewAgendaOutlined";
 import SettingsIcon from "@material-ui/icons/Settings";
 import AppsIcon from "@material-ui/icons/Apps";
 import "../css/DashboardHeader.css";
+import { toggleContext } from "./Dashboard";
 
-function DashboardHeader(props) {
-  const navigationtoggle = () => {
-    props.handleDrawer();
-  }
+
+function DashboardHeader() {
+  const toggleinfo = useContext(toggleContext)
   return (
     <div className="header">
       <div className="dashboard" id="text-icons">
-        <DehazeIcon onClick={navigationtoggle} />
+        <DehazeIcon onClick={toggleinfo} />
         <img
           src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png"
           alt="logo2"
