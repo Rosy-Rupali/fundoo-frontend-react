@@ -12,13 +12,16 @@
 .mainNote {
   max-height: 100%;
   width: 100%;
-  border-radius: 15px;
+  border-radius: 15px !important;
   display: flex !important;
   flex-direction: column !important;
   word-wrap: break-word !important;
   flex-wrap: wrap;
   justify-content: space-around;
   box-shadow: 0rem 0.25rem 0.5rem rgba(0, 0, 0, 0.08) !important;
+}
+.mainNote:hover {
+  box-shadow: 0 1px 7px rgb(128, 128, 128) !important;
 }
 #noteHeader {
   padding-left: 5%;
@@ -29,7 +32,13 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif !important;
   word-wrap: break-word !important;
 }
+.note-icons:hover {
+  opacity: 1 !important;
+}
 
+.note-icons {
+  opacity: 0 !important;
+}
 @media screen and (max-width: 800px) {
   .testContainer-note {
     justify-content: space-between;
