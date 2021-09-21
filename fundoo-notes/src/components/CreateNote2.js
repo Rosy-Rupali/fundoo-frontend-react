@@ -9,6 +9,9 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import "../css/CreateNote2.css";
 import NotesIcons from "./NotesIcons";
 import Tooltip from "@material-ui/core/Tooltip";
+import Chip from "@material-ui/core/Chip";
+import AccessTimeIcon from "@material-ui/icons/AccessTime";
+import AccessTime from "@material-ui/icons/AccessTime";
 
 const CreateNote2 = (props) => {
   const [title, settitle] = useState("");
@@ -19,9 +22,11 @@ const CreateNote2 = (props) => {
   const [trash1, setTrash1] = useState(false);
   const [users, setUsers] = useState([]);
   const [reminder, setReminder] = useState("");
+  // const [reminder1, setReminder1] = useState([])
   const [collabArray, setCollabArray] = useState([]);
   const [isPined, setIsPined] = useState(false);
   const [noteAlert, setNoteAlert] = useState(false);
+  let reminderArray = reminder.split("");
   // const pin = () => {
   //   setIsPined(!isPined);
   // };
@@ -50,20 +55,21 @@ const CreateNote2 = (props) => {
   const closeButton = () => {
     let titleValue = titleInput.current.value;
     let descriptionValue = descriptionInput.current.value;
-    titleValue === "" ? alert("please give the title to note") : setNoteAlert(!noteAlert);
+    titleValue === ""
+      ? alert("please give the title to note")
+      : setNoteAlert(!noteAlert);
     descriptionValue === ""
       ? alert("please give the description to note")
       : setNoteAlert(!noteAlert);
 
-    let obj = {
-      title: title,
-      description: description,
-      isArchived: archive1,
-      isDeleted: trash1,
-      color: colour1,
-      collaberator: collabArray,
-      // reminder: reminder,
-    };
+    let obj = new FormData();
+    obj.append("title", title);
+    obj.append("description", description);
+    obj.append("isArchived", archive1);
+    obj.append("isDeleted", trash1);
+    obj.append("color", colour1);
+    obj.append("collaberators", JSON.stringify([...collabArray]));
+    obj.append("reminder", reminder);
     WriteNote(obj)
       .then((response) => {
         console.log(response);
@@ -73,13 +79,13 @@ const CreateNote2 = (props) => {
       });
     props.listentoNote2("true");
   };
+
   const collaborator = () => {
     setCreateNote(!createNote);
   };
   const openCreateNote2 = (data, collabList) => {
     if (data === "opencreatenote2") {
       setCreateNote(!createNote);
-      console.log(JSON.stringify(collabList));
       setCollabArray(collabList);
     }
   };
@@ -147,7 +153,11 @@ const CreateNote2 = (props) => {
                   </Tooltip>
                 ))}
               </div>
-              <div className="reminder-display">{displayReminder}</div>
+             
+                <Chip
+                  icon={<AccessTime />}
+                  label= {reminderArray.map((reminder) => reminder.slice(0, 10))}>
+                </Chip>
               <div className="createnote-closeButton">
                 <NotesIcons
                   archive={archive}

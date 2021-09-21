@@ -1,5 +1,5 @@
 import axios from 'axios'
-const config = {
+let config = {
     headers: {
       "Content-Type": "application/json",
       Authorization: localStorage.getItem("token"),
@@ -7,6 +7,7 @@ const config = {
   };
 
 export const WriteNote = async (obj) => {
+  config.headers["Content-Type"]="multipart/form-data"
     console.log('hi', obj)
     let response = await axios.post('http://fundoonotes.incubation.bridgelabz.com/api/notes/addNotes', obj, config)
     console.log(response)

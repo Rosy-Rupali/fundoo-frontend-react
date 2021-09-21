@@ -30,7 +30,6 @@ const Notes = (props) => {
   const [noteDescription1, setNoteDescription] = useState(
     props.info.description
   );
-  const [collavb, setCollavb] = useState(props.info.collaborators);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -70,24 +69,24 @@ const Notes = (props) => {
             {props.info.title}
           </h4>
           <CardContent className="noteContent" onClick={handleClickOpen}>
-            <Typography>{props.info.description} </Typography>
+            <Typography>{props.info.description}</Typography>
           </CardContent>
-          <div>
-            {collavb.map((user) => {
-              <Tooltip title={user.email}>
-                <span>
-                  <AccountCircleIcon />
-                </span>
-              </Tooltip>;
-            })}
-          </div>
+          <div className="display-collab">
+          {props.info.collaborators.map((user) => (
+                  <Tooltip title={user.email}>
+                    <span>
+                      <AccountCircleIcon />
+                    </span>
+                  </Tooltip>
+                ))}
+           </div>
           <CardActions className="note-icons">
-              <NotesIcons
-                action="updatenote"
-                noteDetails={props.info}
-                id={props.info.id}
-                displayNote={props.displayNote}
-              />
+            <NotesIcons
+              action="updatenote"
+              noteDetails={props.info}
+              id={props.info.id}
+              displayNote={props.displayNote}
+            />
           </CardActions>
         </Card>
       </div>
