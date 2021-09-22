@@ -15,7 +15,7 @@ import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 import AccessTime from "@material-ui/icons/AccessTime";
 import "../css/Notes.css";
-import { updateNotes } from "../Services/DataService";
+import { removeReminder, updateNotes } from "../Services/DataService";
 import Tooltip from "@material-ui/core/Tooltip";
 import CustomizedDialogs from "./CollabDialog";
 
@@ -29,6 +29,7 @@ const Notes = (props) => {
   const [id1, setId1] = useState(props.info.id);
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);
+  const [noteReminder, setNoteReminder] = useState("");
   const [noteTitle1, setNoteTitle] = useState(props.info.title);
   const [noteDescription1, setNoteDescription] = useState(
     props.info.description
@@ -41,7 +42,20 @@ const Notes = (props) => {
     setOpen1(true);
   };
 
-  const handleSave = () => {};
+  const deleteNoteReminder = () => {
+    let obj = {
+      noteIdList : [props.info.id],
+    };
+    removeReminder(obj)
+      .then((response) => {
+        console.log(response);
+        props.displayNote();
+        setNoteReminder(noteReminder);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const handleClose = () => {
     setOpen(false);
     let noteUpdateData = new FormData(); // Currently empty
@@ -98,6 +112,7 @@ const Notes = (props) => {
                 className="reminder-area-note"
                 icon={<AccessTime style={{ fontSize: "small" }} />}
                 label={remind.slice(3, 21)}
+                onDelete={deleteNoteReminder}
               />
             ))}
           </div>

@@ -118,6 +118,11 @@ const CreateNote2 = (props) => {
     setReminder(a.concat(b));
     console.log(reminder, "okkkkkkkkkkkkk");
   };
+  const deleteReminder = (date, time) => {
+    console.log(date, time);
+    setSelectedDate("");
+    setSelectedTime("");
+  }
 
   const getReminder = () => {
     if (
@@ -132,7 +137,7 @@ const CreateNote2 = (props) => {
             className="reminder-area"
             icon={<AccessTime style={{ fontSize: "small" }} />}
             label={selectedDate + "," + selectedTime}
-            // onClick={deleteReminder}
+            onDelete={deleteReminder}
           />
         </>
       );

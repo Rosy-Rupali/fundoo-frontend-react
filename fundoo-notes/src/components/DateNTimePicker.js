@@ -73,10 +73,7 @@ export default function DateNTimePickers(props) {
         .catch((error) => {
           console.log(error);
         });
-    } else {
-      props.reminder(selectDate, selectTime);
-      props.displayNote();
-    }
+      }
   };
   return (
     <div>
