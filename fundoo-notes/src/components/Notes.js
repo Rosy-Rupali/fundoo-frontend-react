@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import NotesIcons from "./NotesIcons";
 import Dialog from "@material-ui/core/Dialog";
@@ -12,10 +12,12 @@ import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import Chip from "@material-ui/core/Chip";
+import AccessTime from "@material-ui/icons/AccessTime";
 import "../css/Notes.css";
 import { updateNotes } from "../Services/DataService";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Tooltip from "@material-ui/core/Tooltip";
+import CustomizedDialogs from "./CollabDialog";
 
 const DialogContent = withStyles((theme) => ({
   root: {
@@ -26,6 +28,7 @@ const DialogContent = withStyles((theme) => ({
 const Notes = (props) => {
   const [id1, setId1] = useState(props.info.id);
   const [open, setOpen] = useState(false);
+  const [open1, setOpen1] = useState(false);
   const [noteTitle1, setNoteTitle] = useState(props.info.title);
   const [noteDescription1, setNoteDescription] = useState(
     props.info.description
@@ -34,7 +37,11 @@ const Notes = (props) => {
   const handleClickOpen = () => {
     setOpen(true);
   };
+  const addCollab = () => {
+    setOpen1(true);
+  };
 
+  const handleSave = () => {};
   const handleClose = () => {
     setOpen(false);
     let noteUpdateData = new FormData(); // Currently empty
@@ -58,6 +65,13 @@ const Notes = (props) => {
   const noteDescription = (e) => {
     setNoteDescription(e.target.value);
   };
+
+  // useEffect(() => {
+  //   if(props.info.reminder !== 0 && props.info.reminder !== undefined){
+
+  //   }
+  // })
+
   return (
     <div className="mainContainer">
       <div className="testContainer-note">
@@ -72,14 +86,22 @@ const Notes = (props) => {
             <Typography>{props.info.description}</Typography>
           </CardContent>
           <div className="display-collab">
-          {props.info.collaborators.map((user) => (
-                  <Tooltip title={user.email}>
-                    <span>
-                      <AccountCircleIcon />
-                    </span>
-                  </Tooltip>
-                ))}
-           </div>
+            {props.info.collaborators.map((user) => (
+              <Tooltip title={user.email}>
+                <span id="account-collab">
+                  <CustomizedDialogs />
+                </span>
+              </Tooltip>
+            ))}
+            {props.info.reminder.map((remind) => (
+              <Chip
+                className="reminder-area-note"
+                icon={<AccessTime style={{ fontSize: "small" }} />}
+                label={remind.slice(3, 21)}
+              />
+            ))}
+          </div>
+
           <CardActions className="note-icons">
             <NotesIcons
               action="updatenote"

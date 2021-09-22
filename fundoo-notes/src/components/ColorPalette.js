@@ -52,7 +52,7 @@ export default function SimpleColourPopper(props) {
     console.log(event.target.id);
     let obj = {
       color: color,
-      noteIdList: [props.id2],
+      noteIdList: [props.id1],
     };
     if (props.actionColor === "createnote") {
       props.color(color);

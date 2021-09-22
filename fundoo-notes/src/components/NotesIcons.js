@@ -17,20 +17,20 @@ const NotesIcons = (props) => {
   const [open, setOpen] = React.useState(false);
   const [trash, setIsTrashed] = React.useState(false);
 
-  const handleCollaborator = () => {
+  const handleCollaborator = (user) => {
     if (props.action == "createnote") {
       props.Collaborator();
-    } else  if(props.action == 'updatenote') {
-      let obj = {
-        
-      }
+    } else if (props.action == "updatenote") {
+      // let id = props.info.id;
+      // let data = user;
+      // add
     }
   };
 
   const handleTrash = () => {
     setIsTrashed(true);
     setOpen(true);
-    
+
     console.log(props.trash, "hello");
     if (props.action === "createnote") {
       props.trash();
@@ -64,7 +64,13 @@ const NotesIcons = (props) => {
   return (
     <div className="displayNotesIcons-mainContainer">
       <div className="displayNotes-icons">
-        <DateNTimePickers reminder={props.reminder} />
+        <DateNTimePickers
+          reminder={props.reminder}
+          displayNote={props.displayNote}
+          actionReminder={props.action}
+          details={props.noteDetails}
+          id1={props.id}
+        />
         <PersonAddOutlinedIcon
           onClick={handleCollaborator}
           style={{ fontSize: "medium" }}
@@ -74,7 +80,7 @@ const NotesIcons = (props) => {
           color={props.color}
           actionColor={props.action}
           details={props.noteDetails}
-          id2={props.id}
+          id1={props.id}
           displayNote={props.displayNote}
         />
         <ImageOutlinedIcon style={{ fontSize: "medium" }} />
@@ -121,4 +127,4 @@ const NotesIcons = (props) => {
     </div>
   );
 };
-export default NotesIcons
+export default NotesIcons;

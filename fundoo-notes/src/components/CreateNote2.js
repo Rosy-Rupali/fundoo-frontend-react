@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/core/styles";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Button from "@material-ui/core/Button";
 import { WriteNote } from "../Services/DataService";
@@ -10,8 +11,18 @@ import "../css/CreateNote2.css";
 import NotesIcons from "./NotesIcons";
 import Tooltip from "@material-ui/core/Tooltip";
 import Chip from "@material-ui/core/Chip";
-import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import AccessTime from "@material-ui/icons/AccessTime";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    "& > *": {
+      margin: "theme.spacing(0.1) !important",
+    },
+  },
+}));
 
 const CreateNote2 = (props) => {
   const [title, settitle] = useState("");
@@ -21,12 +32,13 @@ const CreateNote2 = (props) => {
   const [archive1, setArchive1] = useState(false);
   const [trash1, setTrash1] = useState(false);
   const [users, setUsers] = useState([]);
-  const [reminder, setReminder] = useState("");
-  // const [reminder1, setReminder1] = useState([])
+  const [selectedDate, setSelectedDate] = useState(new Date(""));
+  const [selectedTime, setSelectedTime] = useState("");
+  const [reminder, setReminder] = useState([]);
   const [collabArray, setCollabArray] = useState([]);
   const [isPined, setIsPined] = useState(false);
   const [noteAlert, setNoteAlert] = useState(false);
-  let reminderArray = reminder.split("");
+  // let reminderArray = reminder.split("");
   // const pin = () => {
   //   setIsPined(!isPined);
   // };
@@ -99,11 +111,34 @@ const CreateNote2 = (props) => {
   }, [colour1]);
 
   const displayReminder = (date, time) => {
+    setSelectedDate(date);
+    setSelectedTime(time);
     let a = date.concat("T");
     let b = time;
     setReminder(a.concat(b));
-    console.log(reminder);
+    console.log(reminder, "okkkkkkkkkkkkk");
   };
+
+  const getReminder = () => {
+    if (
+      selectedDate !== "" &&
+      selectedTime !== "" &&
+      selectedDate !== undefined &&
+      selectedTime !== undefined
+    ) {
+      return (
+        <>
+          <Chip
+            className="reminder-area"
+            icon={<AccessTime style={{ fontSize: "small" }} />}
+            label={selectedDate + "," + selectedTime}
+            // onClick={deleteReminder}
+          />
+        </>
+      );
+    }
+  };
+
   const trash = (data) => {
     console.log(data);
     setTrash1(data);
@@ -152,12 +187,9 @@ const CreateNote2 = (props) => {
                     </span>
                   </Tooltip>
                 ))}
+                {getReminder()}
               </div>
-             
-                <Chip
-                  icon={<AccessTime />}
-                  label= {reminderArray.map((reminder) => reminder.slice(0, 10))}>
-                </Chip>
+
               <div className="createnote-closeButton">
                 <NotesIcons
                   archive={archive}

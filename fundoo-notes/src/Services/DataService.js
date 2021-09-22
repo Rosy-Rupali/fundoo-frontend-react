@@ -52,6 +52,28 @@ export const changeColorNotes = async (data) => {
   console.log(response);
   return response;
 }
+// export const addCollaboratorsNotes = async (id, data, token) => {
+//   console.log(data)
+//   let response = await axios.post(http://fundoonotes.incubation.bridgelabz.com/api/notes/${id}/AddcollaboratorsNotes`, data, { headers: {"Authorization" : token} })
+// }', data, config)
+//   console.log(response);
+//   return response;
+// }
+
+export const addReminder = async (data) => {
+  console.log(data)
+  let response = await axios.post('http://fundoonotes.incubation.bridgelabz.com/api/notes/addUpdateReminderNotes', data, config)
+  console.log(response);
+  return response;
+}
+
+export const removeReminder = async (data) => {
+  console.log(data)
+  let response = await axios.post('http://fundoonotes.incubation.bridgelabz.com/api/notes/removeReminderNotes', data, config)
+  console.log(response);
+  return response;
+}
+
 
 
 
