@@ -44,7 +44,7 @@ const Notes = (props) => {
 
   const deleteNoteReminder = () => {
     let obj = {
-      noteIdList : [props.info.id],
+      noteIdList: [props.info.id],
     };
     removeReminder(obj)
       .then((response) => {
@@ -119,6 +119,8 @@ const Notes = (props) => {
 
           <CardActions className="note-icons">
             <NotesIcons
+              isArchived={props.info.isArchived}
+              isDeleted={props.info.isDeleted}
               action="updatenote"
               noteDetails={props.info}
               id={props.info.id}

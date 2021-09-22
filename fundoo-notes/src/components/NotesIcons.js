@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
+import RestoreFromTrashRoundedIcon from "@material-ui/icons/RestoreFromTrashRounded";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 import SimpleSnackbar from "../components/ArchiveIcon";
@@ -12,6 +13,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import "../css/NotesIcons.css";
 import DateNTimePickers from "./DateNTimePicker";
 import { trashNotes } from "../Services/DataService";
+import SimpleSnackbarUnarchive from "./UnarchiveIcon";
 
 const NotesIcons = (props) => {
   const [open, setOpen] = React.useState(false);
@@ -37,6 +39,29 @@ const NotesIcons = (props) => {
     } else if (props.action === "updatenote") {
       let obj = {
         isDeleted: true,
+        noteIdList: [props.id],
+      };
+      trashNotes(obj)
+        .then((response) => {
+          props.displayNote();
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  const handleUntrash = () => {
+    setIsTrashed(true);
+    setOpen(true);
+
+    console.log(props.trash, "hello");
+    if (props.action === "createnote") {
+      props.trash();
+    } else if (props.action === "updatenote") {
+      let obj = {
+        isDeleted: false,
         noteIdList: [props.id],
       };
       trashNotes(obj)
@@ -84,44 +109,92 @@ const NotesIcons = (props) => {
           displayNote={props.displayNote}
         />
         <ImageOutlinedIcon style={{ fontSize: "medium" }} />
-        <SimpleSnackbar
-          archive={props.archive}
-          actionArchive={props.action}
-          details={props.noteDetails}
-          id1={props.id}
-          displayNote={props.displayNote}
-        />
+        {props.isArchived ? (
+          <SimpleSnackbarUnarchive
+            archive={props.archive}
+            actionArchive={props.action}
+            details={props.noteDetails}
+            id1={props.id}
+            displayNote={props.displayNote}
+          />
+        ) : (
+          <SimpleSnackbar
+            archive={props.archive}
+            actionArchive={props.action}
+            details={props.noteDetails}
+            id1={props.id}
+            displayNote={props.displayNote}
+          />
+        )}
 
-        <DeleteOutlineOutlinedIcon
-          style={{ fontSize: "medium" }}
-          onClick={handleTrash}
-          trash={props.trash}
-        />
-        <Snackbar
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
-          open={open}
-          autoHideDuration={3000}
-          onClose={handleClose}
-          message="Note is deleted"
-          action={
-            <React.Fragment>
-              <Button color="secondary" size="small" onClick={handleClose}>
-                UNDO
-              </Button>
-              <IconButton
-                size="small"
-                aria-label="close"
-                color="inherit"
-                onClick={handleClose}
-              >
-                <CloseIcon fontSize="small" />
-              </IconButton>
-            </React.Fragment>
-          }
-        />
+        {props.isDeleted ? (
+          <>
+          <RestoreFromTrashRoundedIcon
+            style={{ fontSize: "medium" }}
+            onClick={handleUntrash}
+            trash={props.trash}
+          />
+            <Snackbar
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              open={open}
+              autoHideDuration={3000}
+              onClose={handleClose}
+              message="Note is untrashed"
+              action={
+                <React.Fragment>
+                  <Button color="secondary" size="small" onClick={handleClose}>
+                    UNDO
+                  </Button>
+                  <IconButton
+                    size="small"
+                    aria-label="close"
+                    color="inherit"
+                    onClick={handleClose}
+                  >
+                    <CloseIcon fontSize="small" />
+                  </IconButton>
+                </React.Fragment>
+              }
+            />
+            </>
+          
+        ) : (
+          <>
+          <DeleteOutlineOutlinedIcon
+            style={{ fontSize: "medium" }}
+            onClick={handleTrash}
+            trash={props.trash}
+          />
+            <Snackbar
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              open={open}
+              autoHideDuration={3000}
+              onClose={handleClose}
+              message="Note is deleted"
+              action={
+                <React.Fragment>
+                  <Button color="secondary" size="small" onClick={handleClose}>
+                    UNDO
+                  </Button>
+                  <IconButton
+                    size="small"
+                    aria-label="close"
+                    color="inherit"
+                    onClick={handleClose}
+                  >
+                    <CloseIcon fontSize="small" />
+                  </IconButton>
+                </React.Fragment>
+              }
+            />
+            </>
+        )}
         <MoreVertOutlinedIcon style={{ fontSize: "medium" }} />
       </div>
     </div>
