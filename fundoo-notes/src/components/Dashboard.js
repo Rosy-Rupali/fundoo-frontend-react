@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Profiler, useEffect } from "react";
 import DashboardHeader from "./DashboardHeader";
 import CreateNote1 from "./CreateNote1";
 import CreateNote2 from "./CreateNote2";
@@ -17,6 +17,7 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import DisplayNotesNew from "./DisplayNotesNew";
 import "../css/DashboardMain.css";
 import "../css/SideNavbar.css";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   hide: {
@@ -26,7 +27,9 @@ const useStyles = makeStyles((theme) => ({
     width: "200px",
     flexShrink: 0,
     whiteSpace: "nowrap",
-    marginTop: "60px !important",
+    // position: "relative !important",
+    // bottom: "80px !important",
+    // marginTop: "60px !important",
   },
   drawerOpen: {
     width: "180px !important",
@@ -52,15 +55,15 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: "hidden",
-    width: theme.spacing(2.7),
+    width: theme.spacing(4.7),
     [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(6.5) + 1,
+      width: theme.spacing(5.5) + 1,
       paddingLeft: 3,
       marginTop: 44,
     },
     marginTop: 55,
     position: "relative !important",
-    bottom: "100px !important",
+    bottom: "80px !important",
     border: "none !important",
   },
 }));
@@ -72,7 +75,7 @@ const handleDrawer = {
 
 export const toggleContext = React.createContext(handleDrawer);
 
-function DashBoard() {
+function DashBoard(props) {
   const [openNote, setOpenNote] = useState(false);
   const [handleDrawer1, setHandleDrawer] = useState(false);
   const [archiveDrawer, setarchiveDrawer] = useState(false);
@@ -94,16 +97,49 @@ function DashBoard() {
     }
   };
 
+  const drawerNotes = () => {
+    props.dispatch({type: "Notes"})
+  }
   const drawerArchive = () => {
-    console.log("openarchive");
     setarchiveDrawer(!archiveDrawer);
     console.log(archiveDrawer);
+    props.dispatch({type: "Archives"})
   };
   const drawerTrash = () => {
-    console.log("opentrash");
     settrashDrawer(!trashDrawer);
     console.log(trashDrawer);
+    props.dispatch({type: "Trash"})
   };
+  useEffect(() => {
+    console.log(props);
+  }, [props]);
+  const callback = (
+    id,
+    phase,
+    actualDuration,
+    baseDuration,
+    startTime,
+    commitTime,
+    interaction
+  ) => {
+    console.log(
+      "id is: " +
+        id +
+        ", Phase is: " +
+        phase +
+        ", actualDuration is: " +
+        actualDuration +
+        ", Base Duration is: " +
+        baseDuration +
+        ", Start Time is :" +
+        startTime +
+        ", Commit Time is: " +
+        commitTime +
+        ", interaction : " +
+        interaction
+    );
+  };
+
   const handleClickAwayEventDashboard = () => {};
   return (
     <div class="dashboard-main-container">
@@ -128,7 +164,7 @@ function DashBoard() {
             }}
           >
             <List className="drawer-expanded">
-              <ListItem button>
+              <ListItem button onClick={drawerNotes}>
                 <ListItemIcon>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -178,9 +214,11 @@ function DashBoard() {
         )}
       </div>
       <div className="displaynote-container">
+        {/* <Profiler id="displayOfNotes" onRender={callback}> */}
         <DisplayNotesNew archiveOpen={archiveDrawer} trashOpen={trashDrawer} />
+        {/* </Profiler> */}
       </div>
     </div>
   );
 }
-export default DashBoard;
+export default connect()(DashBoard);
