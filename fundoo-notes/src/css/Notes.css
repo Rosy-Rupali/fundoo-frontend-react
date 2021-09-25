@@ -39,10 +39,16 @@
 .note-icons {
   opacity: 0 !important;
 }
-.display-collab{
+.display-collab {
   padding-left: 5%;
 }
-@media screen and (max-width: 800px) {
+
+#account-collab {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+@media only screen and (max-width: 800px) and (min-width: 451px) {
   .testContainer-note {
     justify-content: space-between;
     align-items: center;
@@ -55,7 +61,7 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
   .testContainer-note {
     width: 350%;
     justify-content: space-between;

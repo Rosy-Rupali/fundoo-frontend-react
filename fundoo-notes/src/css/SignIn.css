@@ -1,48 +1,109 @@
-#header {
+#header-sign {
   width: 100vw;
   height: 100vh;
 }
-.box {
-  width: 35%;
+.testConatiner-header {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+#box-sign {
+  width: 50%;
   height: 90%;
-  position: relative;
-  left: 30%;
-  top: 5%;
   border: 1px solid #dadce0;
   border-radius: 2%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+}
+.mainheading {
+  height: 25%;
+  width: 100%;
+  text-align: center;
+  font-size: 23px;
+  margin-top: 8%;
   justify-content: center;
 }
-.mainHeading {
-  position: relative;
-  top: 3%;
-  align-items: center;
+#mainHeading-sign {
+  height: 25%;
+  width: 100%;
+  padding-left: 20%;
   font-family: "Helvetica Neue", sans-serif;
-  font-size: 25px;
 }
-.fields {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.text1 {
+
+.text-p1 {
   color: cornflowerblue;
   font-weight: 600;
 }
-.text2{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.para-signin {
+  height: 15%;
+  padding-left: 20%;
+  width: 100%;
 }
 .signin {
+  height: 5%;
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   font-family: "Google Sans", Roboto, Arial, sans-serif;
   font-weight: 600;
-  width: 75%;
+  width: 53%;
   color: cornflowerblue;
   justify-content: space-between;
+  padding-left: 20%;
+  
+}
+
+@media only screen and (max-width: 800px) and (min-width: 430px) {
+  #box-sign {
+    margin-top: 10%;
+    height: 80%;
+    width: 55%;
+  }
+  .signin {
+    width: 90% !important;
+    margin-right: 75%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  #box-sign {
+    width: 90%;
+    height: 80%;
+    
+  }
+  .mainheading {
+    font-size: 15px;
+  }
+  #mainHeading-sign {
+    width: 80%;
+    align-self: flex-start;
+    justify-content: center;
+  }
+  .para-signin {
+    width: 70%;
+    font-size: 15px;
+    margin-bottom: 15%;
+  }
+  .signin {
+    width: 70%;
+  }
+  .MuiInputBase-root {
+    color: rgba(0, 0, 0, 0.87);
+    cursor: text;
+    display: flex !important;
+    position: relative;
+    font-size: 0.5rem !important;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center !important;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 200 !important;
+    line-height: 1.1876em;
+    letter-spacing: 0.00938em;
+    width: 55% !important;
+  }
+  .text-p1 {
+    font-size: 13px;
+  }
 }
