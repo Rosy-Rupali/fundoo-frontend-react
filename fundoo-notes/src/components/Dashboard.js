@@ -78,6 +78,7 @@ export const toggleContext = React.createContext(handleDrawer);
 function DashBoard(props) {
   const [openNote, setOpenNote] = useState(false);
   const [handleDrawer1, setHandleDrawer] = useState(false);
+  const[notesDrawer, setNotesDrawer] = useState(false);
   const [archiveDrawer, setarchiveDrawer] = useState(false);
   const [trashDrawer, settrashDrawer] = useState(false);
   const classes = useStyles();
@@ -98,16 +99,15 @@ function DashBoard(props) {
   };
 
   const drawerNotes = () => {
+    setNotesDrawer(!notesDrawer)
     props.dispatch({type: "Notes"})
   }
   const drawerArchive = () => {
     setarchiveDrawer(!archiveDrawer);
-    console.log(archiveDrawer);
     props.dispatch({type: "Archives"})
   };
   const drawerTrash = () => {
     settrashDrawer(!trashDrawer);
-    console.log(trashDrawer);
     props.dispatch({type: "Trash"})
   };
   useEffect(() => {
@@ -215,7 +215,7 @@ function DashBoard(props) {
       </div>
       <div className="displaynote-container">
         {/* <Profiler id="displayOfNotes" onRender={callback}> */}
-        <DisplayNotesNew archiveOpen={archiveDrawer} trashOpen={trashDrawer} />
+        <DisplayNotesNew notesOpen={notesDrawer} archiveOpen={archiveDrawer} trashOpen={trashDrawer} />
         {/* </Profiler> */}
       </div>
     </div>

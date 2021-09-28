@@ -6,6 +6,7 @@ import "../css/login.css";
 import { SignUp } from "../Services/UserService";
 
 
+
 const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{8,}$/;
 const emailRegex = /^[a-z0-9.+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$/;
 const nameRegex = /^[A-Z][a-z]{2,}$/;
@@ -100,7 +101,9 @@ class LoginPage extends Component {
     });
     return passwordsError === "";
   };
-
+  signInInstead = () => {
+    this.props.history.push('/signin')
+  }
   validateConfirm = () => {
     let confirmPasswordError = "";
     console.log(this.state.passwords);
@@ -243,7 +246,7 @@ class LoginPage extends Component {
               />
               <h3 id="text-head1">Use my current email address instead</h3>
             </div>
-            <div className="fields1">
+            <div className="fields1" id="passwordfield">
               <TextField
                 id="outlined-basic"
                 name="passwords"
@@ -286,7 +289,7 @@ class LoginPage extends Component {
               </span>
             </div>
             <div className="signin">
-              <p> Sign in Instead </p>
+              <Button onClick={this.signInInstead} style={{color: "cornflowerblue", fontWeight: 600}}> Sign in Instead </Button>
               <Button
                 variant="contained"
                 color="primary"

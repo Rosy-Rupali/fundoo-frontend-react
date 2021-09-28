@@ -13,10 +13,12 @@ const DisplayNotesNew = (props) => {
         let arr1 = response.data.data.data;
         let arr = [];
         if (data == "Search") {
-          console.log(props.searchData)
           arr = arr1.filter((words) =>
             words.title.toLowerCase().includes(props.searchData.toLowerCase())
           );
+          setArray(arr);
+        } else if (data == "notes") {
+          arr = arr1;
           setArray(arr);
         }
         if (data == "archive") {
@@ -42,23 +44,21 @@ const DisplayNotesNew = (props) => {
       });
   };
 
-  // let selectedNotes = notes;
-  // if (props.searchData) {
-  //   console.log(props.searchData)
-  //   selectedNotes = notes.filter((words) =>
-  //     words.title.toLowerCase().includes(props.searchData.toLowerCase())
-  //   );
-  //   setArray(selectedNotes);
-  // }
   useEffect(() => {
-    displayNote("Search")
+    if (props.notesOpen == true) {
+      displayNote("notes");
+    }
+  }, [props.notesOpen]);
+
+  useEffect(() => {
+    displayNote("Search");
+    
   }, [props.searchData]);
 
   useEffect(() => {
-    console.log(props);
     if (props.archiveOpen == true) {
       displayNote("archive");
-    } else {
+    } else if(props.archiveOpen == false){
       displayNote(" ");
     }
   }, [props.archiveOpen]);
@@ -67,10 +67,13 @@ const DisplayNotesNew = (props) => {
     console.log(props);
     if (props.trashOpen == true) {
       displayNote("trash");
-    } else {
+    } else if(props.trashOpen == false){
       displayNote(" ");
     }
   }, [props.trashOpen]);
+  useEffect(() => {
+    displayNote(" ")
+  }, [])
 
   console.log(noteArray);
   return (
@@ -87,7 +90,6 @@ const DisplayNotesNew = (props) => {
 const mapStateToProps = (state) => {
   return {
     searchData: state.searchBarReducer.searchData,
-    
   };
 };
 export default connect(mapStateToProps)(DisplayNotesNew);

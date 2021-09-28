@@ -1,7 +1,9 @@
 import React from "react";
-import LoginPage from '../pages/Login'
-import SignIn from '../pages/SignIn'
+import LoginPage from "../pages/Login";
+import SignIn from "../pages/SignIn";
 import DashBoard from "../components/Dashboard";
+import ProtectedRoute from "../Protected Route/ProtectedRoute";
+import AuthencatedRoute from "../AuthRoute/AuthRoute";
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,9 +17,9 @@ const RouterDOM = () => {
     <>
       <BrowserRouter>
         <Switch>
-            <Route exact path="/" component={LoginPage} />
-            <Route path="/signin" component={SignIn} />
-            <Route path="/dashboard" component={DashBoard} />
+          <Route exact path="/" component={LoginPage} />
+          <AuthencatedRoute path="/signin" component={SignIn} />
+          <ProtectedRoute path="/dashboard" component={DashBoard} />
         </Switch>
       </BrowserRouter>
     </>

@@ -80,8 +80,9 @@ componentDidMount(){
   render() {
     return (
       <div id="header-sign">
+      <div className="testConatiner-header">
         <div id="box-sign">
-          <div id="mainHeading-sign">
+          <div  className="mainheading">
             <svg
               viewBox="0 0 75 24"
               width="75"
@@ -126,7 +127,8 @@ componentDidMount(){
             </svg>
             <h3>Sign in</h3>
             <p>Use Your Google Account</p>
-
+            </div>
+            <div id="mainHeading-sign" >
             <TextField
               name="email"
               id="outlined-basic"
@@ -153,13 +155,13 @@ componentDidMount(){
               }
               fullWidth
             />
+             <p className="text-p1">Forgot email?</p>
           </div>
-          <div>
-            <p className="text-p1">Forgot email?</p>
+          <div className="para-signin">
             <p>Not your computer? Use Private Window to sign in.</p>
             <p className="text-p1">Learn more</p>
           </div>
-          <div className="signin">
+          <div className="signin-account">
             <p> Create Account</p>
             <Button
               variant="contained"
@@ -170,6 +172,7 @@ componentDidMount(){
               Next
             </Button>
           </div>
+        </div>
         </div>
       </div>
     );
